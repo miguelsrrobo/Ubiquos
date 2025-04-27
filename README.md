@@ -1,5 +1,5 @@
 <p align = "center">
-  <img src="https://github.com/miguelsrrobo/zabbix-install/blob/main/INA226/Screenshot%202025-04-09%20at%2010-15-57%20INA226%2036V%2016-Bit%20Ultra-Precise%20I2C%20Output%20Current%20Voltage%20and%20Power%20Monitor%20With%20Alert%20datasheet%20(Rev.%20B)%20-%20ina226.pdf.png" alt="Rinha logo" width="90%" />
+  <img src="https://github.com/miguelsrrobo/Obiquos/blob/main/Imagens/logo_ufsc1.png" alt="Rinha logo" width="30%" />
 </p>
 
 ## Resumo
