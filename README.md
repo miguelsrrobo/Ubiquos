@@ -118,8 +118,74 @@ O sistema inicia no **Módulo Fotovoltaico**, que é responsável pela geração
 4. **Visualização**: O Zabbix coleta os dados armazenados e apresenta ao usuário via interface web.
 
 ## 6. Diagrama Elétrico (se houver)
-- Diagrama esquemático detalhado dos componentes eletrônicos utilizados no hardware.
-- Explicação de como cada componente se conecta e interage no sistema.
+
+### ➔ Visão Geral
+O circuito é um **Conversor Boost** que:
+- Recebe uma tensão de entrada (provavelmente do seu **módulo fotovoltaico**),
+- Amplifica a tensão usando um **MOSFET** de potência,
+- Controla o chaveamento do MOSFET via um **driver IR2111**,
+- Faz o envio da energia para a **carga**,
+- E o controle é realizado externamente (por exemplo, via **ESP8266**), como mostrado no seu projeto geral.
+
+---
+
+<p align = "center">
+  <img src="https://github.com/miguelsrrobo/Obiquos/blob/main/Imagens/diagrama.png" alt="Rinha logo" width="30%" />
+</p>
+
+---
+
+# 📋 Principais Componentes e Suas Funções
+
+| Componente | Função Principal | Conexão |
+|:-----------|:-----------------|:--------|
+| **Q1 - IRF540** | MOSFET de potência. Responsável por ligar/desligar rapidamente para controlar o Boost. | Controlado pelo sinal "LO" do driver **U1 (IR2111)**. |
+| **U1 - IR2111PBF** | Driver de MOSFET. Amplifica sinais de controle (baixo nível) para acionar o MOSFET (alto nível). | Recebe VCC, sinais de controle, e envia sinais HO/LO para o gate do MOSFET. |
+| **D1 - MUR820** | Diodo de potência rápido. Permite a passagem da corrente para a carga quando o MOSFET está desligado. Protege e mantém o fluxo contínuo. | Conectado entre o indutor L2 e a saída. |
+| **L2 - 150 µH** | Indutor do Boost. Armazena energia enquanto o MOSFET está ligado e libera quando desligado, elevando a tensão. | Conectado em série com a entrada e o MOSFET. |
+| **C11 - 120 µF** | Capacitor de entrada. Filtra ruídos da fonte de entrada (painel solar, por exemplo). | Colocado próximo da entrada VCC. |
+| **C14 - 470 µF** | Capacitor de saída. Suaviza a tensão de saída, reduzindo ripple. | Colocado próximo à carga. |
+| **C15 - 1 µF** | Capacitor auxiliar de bootstrap para o driver IR2111 (alimentar o gate do MOSFET em altos níveis). | Entre os pinos VB e VS do IR2111. |
+| **R2 - 81 Ω** | Resistor de Gate. Limita a corrente de acionamento do MOSFET, controlando a velocidade de chaveamento. | Entre o pino de saída do driver (LO) e o Gate do MOSFET. |
+| **X1 - BORNERA 3 PINOS** | Conector de entrada/saída. Para ligar alimentação, carga, etc. | Facilita conexões externas no sistema. |
+
+---
+
+# 🔄 Como os Componentes Interagem (Passo a Passo)
+
+1. **Entrada de Energia (36V)**:
+   - A energia vem do **módulo fotovoltaico** e entra pelo conector **X1**.
+   - Passa pelo **capacitor C11** para filtrar ruídos.
+
+2. **Controle de Chaveamento**:
+   - Um microcontrolador (por exemplo, **ESP8266**) envia um sinal PWM para o **driver IR2111 (U1)**.
+   - O IR2111 recebe esse sinal e gera sinais amplificados para controlar o **MOSFET IRF540**.
+
+3. **Funcionamento do Conversor Boost**:
+   - Quando o MOSFET está **ligado**, o **indutor L2** armazena energia.
+   - Quando o MOSFET é **desligado**, o indutor libera energia para a carga através do **diodo D1**.
+
+4. **Estabilização da Saída**:
+   - A energia liberada é suavizada pelo **capacitor de saída C14** antes de ser entregue à carga.
+
+5. **Proteções e Auxílios**:
+   - O **capacitor C15** serve para o circuito bootstrap do IR2111.
+   - O **resistor R2** limita a corrente para proteger o Gate do MOSFET.
+
+6. **Envio de Dados**:
+   - O ESP também coleta informações como tensão e corrente (via sensores como o INA226) e envia os dados para o **Zabbix** para monitoramento remoto.
+
+---
+
+# 🛠️ Resumo Visual (Fluxo)
+```
+Módulo Solar → Entrada VCC → C11 → L2 → (Q1 controlado por U1) → D1 → Carga → Monitoramento
+                  ↓
+            Controle PWM (ESP → IR2111 → MOSFET)
+                  ↓
+          Coleta de Dados → Zabbix (via rede Wi-Fi)
+```
+
 ## 7. Revisão da Literatura
 - Pesquisas e trabalhos relevantes já realizados sobre o tema.
 - Comparação entre a solução proposta e as soluções existentes.
