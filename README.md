@@ -63,13 +63,60 @@ Os requisitos funcionais definem as principais funcionalidades que o protótipo 
 - **Eficiência no uso de recursos:** O firmware do ESP8266 deverá otimizar o uso de memória e processamento, assegurando um consumo energético reduzido, ideal para aplicações em ambientes com restrições de energia.
 
 ## 5. Diagrama de Comunicação
+
+## 5.1 Descrição Geral
+
+Nesta seção, apresentamos o diagrama de comunicação que ilustra o fluxo de dados e a interação entre os principais componentes do sistema de rastreamento de ponto de máxima potência (MPPT) utilizando um conversor Boost, um ESP8266 e o monitoramento via Zabbix.
+
+O sistema é dividido em três grandes blocos:
+- **Módulo Fotovoltaico**
+- **Sistema MPPT**
+- **Data Services (Serviços de Dados)**
+
+Cada etapa será detalhada a seguir.
+
+---
+
 <p align = "center">
   <img src="https://github.com/miguelsrrobo/Obiquos/blob/main/Imagens/diagrama.png" alt="Rinha logo" width="30%" />
 </p>
 
-- Representação gráfica do fluxo de dados e da comunicação entre os componentes do sistema
-(ex.: sensores, atuadores, servidores, dispositivos móveis).
-- Descrição breve de cada elemento e sua função.
+---
+
+## 5.2 Descrição dos Componentes do Diagrama
+
+### 1. Módulo Fotovoltaico
+O sistema inicia no **Módulo Fotovoltaico**, que é responsável pela geração de energia elétrica a partir da radiação solar. A saída de energia gerada é enviada diretamente para o sistema MPPT.
+
+### 2. Sistema MPPT (Boost + ESP)
+
+- **Conversor CC-CC (Boost)**:  
+  O conversor Boost atua para ajustar dinamicamente a tensão e a corrente vindas do módulo fotovoltaico, buscando o ponto de máxima potência (MPPT). Ele é controlado de forma inteligente pelo microcontrolador.
+
+- **ESP8266**:  
+  O ESP é o microcontrolador responsável por:
+  - Ler as informações de tensão, corrente e potência (por meio do sensor INA226, embutido no sistema);
+  - Aplicar o algoritmo de controle MPPT;
+  - Controlar o duty cycle do conversor Boost para otimizar a extração de energia;
+  - Comunicar os dados de monitoramento para o serviço de dados externo.
+
+### 3. Data Services (Zabbix + Banco de Dados)
+
+- **Storage Management**:  
+  O ESP publica as informações de desempenho (como tensão, corrente, potência e estado do sistema) em um banco de dados que integra o Zabbix e o MySQL. Esses dados são armazenados de forma estruturada para posterior análise.
+
+- **Zabbix Web**:  
+  O Zabbix Web é a interface de visualização e monitoramento. Através dele, os dados capturados pelo ESP são acessados por meio de gráficos, alertas e dashboards, permitindo o acompanhamento em tempo real do comportamento do sistema fotovoltaico.
+
+---
+
+## 5.3 Fluxo de Dados Resumido
+
+1. **Geração Solar**: O módulo fotovoltaico gera a energia elétrica.
+2. **Controle MPPT**: A energia gerada é otimizada pelo sistema Boost controlado pelo ESP.
+3. **Monitoramento de Dados**: O ESP lê os dados de energia e publica no sistema de armazenamento.
+4. **Visualização**: O Zabbix coleta os dados armazenados e apresenta ao usuário via interface web.
+
 ## 6. Diagrama Elétrico (se houver)
 - Diagrama esquemático detalhado dos componentes eletrônicos utilizados no hardware.
 - Explicação de como cada componente se conecta e interage no sistema.
