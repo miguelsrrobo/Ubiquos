@@ -31,12 +31,8 @@ Os MPPTs, compostos por conversores CC-CC e sistemas de controle embarcados, uti
 Para superar essas limitações, técnicas de inteligência artificial (AI) como Enxame de Partículas (PSO), têm sido aplicados, proporcionando maior precisão e eficiência (YAP; SARIMUTHU; LIM, 2020). Diante disso, este trabalho propõe a aplicação do metodo (PSO) ao MPPT sob sombreamento parcial, com a implementação desta técnica, proponse um almento da eficiencia energetica
 
 ## 3 Descrição da Proposta
-- Detalhamento da solução proposta (hardware, software ou ambos).
-hardware conectado com zabbix
-- Principais funcionalidades que serão desenvolvidas.
-conectividade com a internet e controle
-- Abordagem utilizada para implementação (ferramentas, plataformas, metodologias).
-zabbix
+Serão desenvolvidos dois hardwares: um conversor CC-CC (Conversor Boost) e um controlador baseado no ESP8266 com sensor INA226. Esses dispositivos serão responsáveis por analisar e controlar o passo de cálculo no conversor CC-CC. Os resultados obtidos, influenciados pela aplicação do método PSO, afetarão o ajuste do passo de cálculo e serão enviados para a plataforma Zabbix.
+
 ## 4. Requisitos
 - Requisitos Funcionais:
 - Lista das funcionalidades essenciais que o sistema deverá oferecer.
