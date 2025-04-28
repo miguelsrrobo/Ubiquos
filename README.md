@@ -34,10 +34,34 @@ Para superar essas limitações, técnicas de inteligência artificial (AI) como
 Serão desenvolvidos dois hardwares: um conversor CC-CC (Conversor Boost) e um controlador baseado no ESP8266 com sensor INA226. Esses dispositivos serão responsáveis por analisar e controlar o passo de cálculo no conversor CC-CC. Os resultados obtidos, influenciados pela aplicação do método PSO, afetarão o ajuste do passo de cálculo e serão enviados para a plataforma Zabbix.
 
 ## 4. Requisitos
-- Requisitos Funcionais:
-- Lista das funcionalidades essenciais que o sistema deverá oferecer.
-- Requisitos Não Funcionais:
-- Critérios de qualidade como desempenho, segurança, confiabilidade, manutenibilidade, etc.
+
+## 4.1 REQUISITOS FUNCIONAIS
+Os requisitos funcionais definem as principais funcionalidades que o protótipo do sistema deverá oferecer para garantir a integração eficaz entre o conversor Boost, o controlador baseado em ESP8266 e a plataforma de monitoramento Zabbix. As principais funcionalidades são:
+
+- **Controle dinâmico do conversor Boost:** O protótipo deverá permitir o ajuste automático do duty cycle do conversor CC-CC (Boost), com base nas leituras de corrente, tensão e potência fornecidas pelo sensor INA226, em tempo real.
+
+- **Aplicação do algoritmo PSO:** O sistema deverá implementar o método de Otimização por Enxame de Partículas (PSO) para ajustar o passo de cálculo e maximizar a eficiência energética do conversor.
+
+- **Envio de dados para o Zabbix:** O controlador ESP8266 deverá enviar continuamente os dados de operação (tensão, corrente, potência e duty cycle) para a plataforma Zabbix, em formato adequado (como JSON via MQTT ou HTTP).
+
+- **Monitoramento remoto:** O sistema deverá possibilitar o monitoramento remoto dos parâmetros do conversor Boost através de dashboards configurados no Zabbix, permitindo a análise e registro de desempenho.
+
+- **Ajuste automático baseado em monitoramento:** Com base nos dados monitorados pelo Zabbix, o sistema deverá permitir ajustes automáticos de parâmetros de operação, caso sejam detectados desvios de desempenho ou falhas.
+
+## 4.2 REQUISITOS NÃO FUNCIONAIS
+
+- **Desempenho:** O protótipo deverá garantir tempos de resposta baixos para leitura dos sensores, aplicação do algoritmo PSO e envio dos dados ao Zabbix, assegurando uma operação em tempo real.
+
+- **Escalabilidade:** O sistema deverá ser capaz de integrar múltiplos conversores Boost monitorados simultaneamente, com cada um enviando dados a uma única instância do Zabbix, conforme a necessidade de expansão.
+
+- **Confiabilidade:** A solução deverá assegurar alta disponibilidade dos dados enviados ao Zabbix, com estratégias de reconexão automática do ESP8266 em caso de falhas de rede.
+
+- **Manutenibilidade:** O código do controlador deverá ser modular, facilitando atualizações futuras no algoritmo de controle, integração com novos sensores ou mudanças na estrutura de comunicação com o Zabbix.
+
+- **Portabilidade:** O sistema deverá ser capaz de ser facilmente adaptado para operar com outros microcontroladores similares ao ESP8266 ou para comunicação com diferentes servidores de monitoramento, além do Zabbix.
+
+- **Eficiência no uso de recursos:** O firmware do ESP8266 deverá otimizar o uso de memória e processamento, assegurando um consumo energético reduzido, ideal para aplicações em ambientes com restrições de energia.
+
 ## 5. Diagrama de Comunicação
 <p align = "center">
   <img src="https://github.com/miguelsrrobo/Obiquos/blob/main/Imagens/diagrama.png" alt="Rinha logo" width="30%" />
