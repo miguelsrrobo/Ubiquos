@@ -39,6 +39,10 @@ Serão desenvolvidos dois hardwares: um conversor CC-CC (Conversor Boost) e um c
 - Requisitos Não Funcionais:
 - Critérios de qualidade como desempenho, segurança, confiabilidade, manutenibilidade, etc.
 ## 5. Diagrama de Comunicação
+<p align = "center">
+  <img src="https://github.com/miguelsrrobo/Obiquos/blob/main/Imagens/diagrama.png" alt="Rinha logo" width="30%" />
+</p>
+
 - Representação gráfica do fluxo de dados e da comunicação entre os componentes do sistema
 (ex.: sensores, atuadores, servidores, dispositivos móveis).
 - Descrição breve de cada elemento e sua função.
