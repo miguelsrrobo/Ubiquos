@@ -191,8 +191,42 @@ Módulo Solar → Entrada VCC → C11 → L2 → (Q1 controlado por U1) → D1 �
 - Comparação entre a solução proposta e as soluções existentes.
 - Tecnologias, metodologias e ferramentas mais modernas utilizadas na área.
 ## 8. Metodologia de Desenvolvimento
-- Detalhamento das etapas de desenvolvimento.
-- Ferramentas e tecnologias que serão utilizadas para implementação e testes.
+Para atingir os objetivos propostos neste trabalho, a metodologia adotada será dividida nas seguintes etapas:
+
+### 1. **Revisão Bibliográfica**
+Será realizada uma revisão aprofundada da literatura relacionada a sistemas fotovoltaicos, técnicas de rastreamento do ponto de máxima potência (MPPT), conversores Boost, microcontroladores (em especial o ESP8266), sensores de corrente e tensão (como o INA226), algoritmos de otimização como PSO (Particle Swarm Optimization) e ferramentas de monitoramento como o Zabbix. A revisão incluirá artigos científicos, normas técnicas, manuais de componentes e publicações relevantes.
+
+### 2. **Análise de Tecnologias**
+Serão estudadas as tecnologias e componentes eletrônicos necessários para a construção do protótipo. Isso incluirá a análise dos circuitos de potência (Boost converter), dispositivos de medição, protocolos de comunicação (I2C, MQTT ou HTTP) e o funcionamento da plataforma Zabbix para monitoramento de dados em tempo real.
+
+### 3. **Desenvolvimento do Protótipo**
+Será implementado um protótipo funcional composto por:
+- Um **conversor Boost** baseado em um MOSFET IRF540, driver IR2111 e diodo MUR820;
+- Um **ESP8266** programado para realizar o controle do duty cycle do conversor com base no algoritmo PSO;
+- Um **sensor INA226** para leitura de corrente, tensão e potência;
+- Comunicação com o **servidor Zabbix**, responsável por receber e apresentar os dados monitorados.
+
+O protótipo será montado em bancada e testado com alimentação vinda de um módulo fotovoltaico ou fonte variável simulando diferentes condições de irradiância.
+
+### 4. **Avaliação e Testes**
+Serão realizados testes controlados para avaliar o comportamento do sistema em diferentes cenários, especialmente sob variações de carga e tensão de entrada. Serão analisados:
+- A estabilidade da operação do conversor;
+- A eficiência do algoritmo PSO na busca do ponto de máxima potência;
+- A confiabilidade da transmissão dos dados para o Zabbix;
+- O tempo de resposta do sistema sob condições dinâmicas.
+
+### 5. **Documentação dos Resultados**
+Todos os dados e observações obtidos ao longo do desenvolvimento e dos testes serão devidamente registrados. A documentação incluirá esquemas elétricos, código-fonte, parâmetros testados, resultados obtidos e uma análise crítica das limitações encontradas e possíveis melhorias futuras.
+
+---
+
+### Abordagem Metodológica
+
+A metodologia adotada será **iterativa e empírica**, com ciclos contínuos de desenvolvimento, teste e refinamento. Essa abordagem permitirá ajustar o comportamento do sistema de forma progressiva, até atingir uma operação estável e eficaz sob diferentes condições.
+
+Com essa metodologia, espera-se contribuir para o avanço de sistemas embarcados inteligentes aplicados à energia solar, demonstrando como a integração entre controle inteligente (PSO), eletrônica de potência (Boost), sensores e monitoramento remoto (Zabbix) pode melhorar significativamente o desempenho e a capacidade de supervisão de sistemas fotovoltaicos.
+
+---
 ## 9. Resultados Esperados
 - Descrição dos principais resultados esperados ao final do projeto.
 - Impacto no monitoramento, automação ou coleta de dados, caso seja relevante.
