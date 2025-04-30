@@ -85,10 +85,10 @@ Cada etapa será detalhada a seguir.
 
 ## 5.2 Descrição dos Componentes do Diagrama
 
-### 1. Módulo Fotovoltaico
+### 5.2.1. Módulo Fotovoltaico
 O sistema inicia no **Módulo Fotovoltaico**, que é responsável pela geração de energia elétrica a partir da radiação solar. A saída de energia gerada é enviada diretamente para o sistema MPPT.
 
-### 2. Sistema MPPT (Boost + ESP)
+### 5.2.2. Sistema MPPT (Boost + ESP)
 
 - **Conversor CC-CC (Boost)**:  
   O conversor Boost atua para ajustar dinamicamente a tensão e a corrente vindas do módulo fotovoltaico, buscando o ponto de máxima potência (MPPT). Ele é controlado de forma inteligente pelo microcontrolador.
@@ -100,7 +100,7 @@ O sistema inicia no **Módulo Fotovoltaico**, que é responsável pela geração
   - Controlar o duty cycle do conversor Boost para otimizar a extração de energia;
   - Comunicar os dados de monitoramento para o serviço de dados externo.
 
-### 3. Data Services (Zabbix + Banco de Dados)
+### 5.2.3. Data Services (Zabbix + Banco de Dados)
 
 - **Storage Management**:  
   O ESP publica as informações de desempenho (como tensão, corrente, potência e estado do sistema) em um banco de dados que integra o Zabbix e o MySQL. Esses dados são armazenados de forma estruturada para posterior análise.
@@ -112,10 +112,10 @@ O sistema inicia no **Módulo Fotovoltaico**, que é responsável pela geração
 
 ## 5.3 Fluxo de Dados Resumido
 
-1. **Geração Solar**: O módulo fotovoltaico gera a energia elétrica.
-2. **Controle MPPT**: A energia gerada é otimizada pelo sistema Boost controlado pelo ESP.
-3. **Monitoramento de Dados**: O ESP lê os dados de energia e publica no sistema de armazenamento.
-4. **Visualização**: O Zabbix coleta os dados armazenados e apresenta ao usuário via interface web.
+- **Geração Solar**: O módulo fotovoltaico gera a energia elétrica.
+- **Controle MPPT**: A energia gerada é otimizada pelo sistema Boost controlado pelo ESP.
+- **Monitoramento de Dados**: O ESP lê os dados de energia e publica no sistema de armazenamento.
+- **Visualização**: O Zabbix coleta os dados armazenados e apresenta ao usuário via interface web.
 
 ## 6. Diagrama Elétrico
 ### ➔ Visão Geral
@@ -134,7 +134,7 @@ O circuito é um **Conversor Boost** que:
 
 ---
 
-# 📋 Principais Componentes e Suas Funções
+### 📋 Principais Componentes e Suas Funções
 
 | Componente | Função Principal | Conexão |
 |:-----------|:-----------------|:--------|
@@ -150,33 +150,33 @@ O circuito é um **Conversor Boost** que:
 
 ---
 
-# 🔄 Como os Componentes Interagem (Passo a Passo)
+### 🔄 Como os Componentes Interagem (Passo a Passo)
 
-1. **Entrada de Energia (36V)**:
+- **Entrada de Energia (36V)**:
    - A energia vem do **módulo fotovoltaico** e entra pelo conector **X1**.
    - Passa pelo **capacitor C11** para filtrar ruídos.
 
-2. **Controle de Chaveamento**:
+- **Controle de Chaveamento**:
    - Um microcontrolador (por exemplo, **ESP8266**) envia um sinal PWM para o **driver IR2111 (U1)**.
    - O IR2111 recebe esse sinal e gera sinais amplificados para controlar o **MOSFET IRF540**.
 
-3. **Funcionamento do Conversor Boost**:
+- **Funcionamento do Conversor Boost**:
    - Quando o MOSFET está **ligado**, o **indutor L2** armazena energia.
    - Quando o MOSFET é **desligado**, o indutor libera energia para a carga através do **diodo D1**.
 
-4. **Estabilização da Saída**:
+- **Estabilização da Saída**:
    - A energia liberada é suavizada pelo **capacitor de saída C14** antes de ser entregue à carga.
 
-5. **Proteções e Auxílios**:
+- **Proteções e Auxílios**:
    - O **capacitor C15** serve para o circuito bootstrap do IR2111.
    - O **resistor R2** limita a corrente para proteger o Gate do MOSFET.
 
-6. **Envio de Dados**:
+- **Envio de Dados**:
    - O ESP também coleta informações como tensão e corrente (via sensores como o INA226) e envia os dados para o **Zabbix** para monitoramento remoto.
 
 ---
 
-# 🛠️ Resumo Visual (Fluxo)
+### 🛠️ Resumo Visual (Fluxo)
 ```
 Módulo Solar → Entrada VCC → C11 → L2 → (Q1 controlado por U1) → D1 → Carga → Monitoramento
                   ↓
@@ -192,13 +192,13 @@ Módulo Solar → Entrada VCC → C11 → L2 → (Q1 controlado por U1) → D1 �
 ## 8. Metodologia de Desenvolvimento
 Para atingir os objetivos propostos neste trabalho, a metodologia adotada será dividida nas seguintes etapas:
 
-### 1. **Revisão Bibliográfica**
+### 8.1. **Revisão Bibliográfica**
 Será realizada uma revisão aprofundada da literatura relacionada a sistemas fotovoltaicos, técnicas de rastreamento do ponto de máxima potência (MPPT), conversores Boost, microcontroladores (em especial o ESP8266), sensores de corrente e tensão (como o INA226), algoritmos de otimização como PSO (Particle Swarm Optimization) e ferramentas de monitoramento como o Zabbix. A revisão incluirá artigos científicos, normas técnicas, manuais de componentes e publicações relevantes.
 
-### 2. **Análise de Tecnologias**
+### 8.2. **Análise de Tecnologias**
 Serão estudadas as tecnologias e componentes eletrônicos necessários para a construção do protótipo. Isso incluirá a análise dos circuitos de potência (Boost converter), dispositivos de medição, protocolos de comunicação (I2C, MQTT ou HTTP) e o funcionamento da plataforma Zabbix para monitoramento de dados em tempo real.
 
-### 3. **Desenvolvimento do Protótipo**
+### 8.3. **Desenvolvimento do Protótipo**
 Será implementado um protótipo funcional composto por:
 - Um **conversor Boost** baseado em um MOSFET IRF540, driver IR2111 e diodo MUR820;
 - Um **ESP8266** programado para realizar o controle do duty cycle do conversor com base no algoritmo PSO;
@@ -207,14 +207,14 @@ Será implementado um protótipo funcional composto por:
 
 O protótipo será montado em bancada e testado com alimentação vinda de um módulo fotovoltaico ou fonte variável simulando diferentes condições de irradiância.
 
-### 4. **Avaliação e Testes**
+### 8.4. **Avaliação e Testes**
 Serão realizados testes controlados para avaliar o comportamento do sistema em diferentes cenários, especialmente sob variações de carga e tensão de entrada. Serão analisados:
 - A estabilidade da operação do conversor;
 - A eficiência do algoritmo PSO na busca do ponto de máxima potência;
 - A confiabilidade da transmissão dos dados para o Zabbix;
 - O tempo de resposta do sistema sob condições dinâmicas.
 
-### 5. **Documentação dos Resultados**
+### 8.5. **Documentação dos Resultados**
 Todos os dados e observações obtidos ao longo do desenvolvimento e dos testes serão devidamente registrados. A documentação incluirá esquemas elétricos, código-fonte, parâmetros testados, resultados obtidos e uma análise crítica das limitações encontradas e possíveis melhorias futuras.
 
 ---
@@ -229,24 +229,26 @@ Com essa metodologia, espera-se contribuir para o avanço de sistemas embarcados
 ## 9. Resultados Esperados
 O principal resultado esperado ao final deste projeto é a implementação bem-sucedida de um sistema de controle e monitoramento para um **Conversor Boost aplicado a sistemas fotovoltaicos**, utilizando um **microcontrolador ESP8266** em conjunto com um sensor INA226 e integração com a plataforma **Zabbix**. O objetivo é garantir a otimização da extração de energia em tempo real, com monitoramento remoto dos parâmetros elétricos do sistema. Espera-se alcançar os seguintes resultados:
 
-1. **Controle Eficiente do Ponto de Máxima Potência (MPPT)**:  
+- **Controle Eficiente do Ponto de Máxima Potência (MPPT)**:  
    Através da implementação de um algoritmo de otimização (como o PSO), espera-se que o sistema seja capaz de ajustar dinamicamente o duty cycle do conversor Boost, extraindo a máxima potência possível do módulo fotovoltaico mesmo em condições ambientais variáveis.
 
-2. **Monitoramento Remoto via Zabbix**:  
+- **Monitoramento Remoto via Zabbix**:  
    O ESP8266 será responsável por coletar dados de tensão, corrente e potência do sistema e transmiti-los em tempo real para a plataforma Zabbix. Isso permitirá o acompanhamento contínuo do desempenho do sistema e a geração de alertas em caso de falhas ou desvios operacionais.
 
-3. **Aquisição e Armazenamento de Dados**:  
+- **Aquisição e Armazenamento de Dados**:  
    Os dados enviados ao Zabbix poderão ser armazenados em um banco de dados (como o MySQL) para posterior análise, possibilitando estudos sobre comportamento energético, eficiência do sistema e condições de operação ao longo do tempo.
 
-4. **Eficiência Energética e Autonomia**:  
+- **Eficiência Energética e Autonomia**:  
    Com o controle inteligente do conversor e a análise em tempo real, espera-se aumentar a eficiência energética do sistema como um todo, reduzindo perdas e otimizando o uso da energia gerada. Isso pode contribuir para maior autonomia em aplicações embarcadas ou off-grid.
 
-5. **Escalabilidade para Monitoramento de Múltiplos Dispositivos**:  
+- **Escalabilidade para Monitoramento de Múltiplos Dispositivos**:  
    O uso do Zabbix permitirá que o sistema seja escalado futuramente, integrando diversos conversores em diferentes pontos, com centralização dos dados em um único painel de controle.
-
+   
+---
 ## 10. Conclusão
 - Resumo da proposta e considerações sobre a importância do projeto.
 - Expectativas futuras em relação à escalabilidade, melhorias ou aplicações futuras do projeto.
+
 ## 11. Referências
 AL-MAJIDI, S. D.; ABBOD, M. F.; AL-RAWESHIDY, H. S. Design of an ann-based smart
 mppt using real data from photovoltaic systems. In: 2019 54th International Universities
