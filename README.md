@@ -19,23 +19,39 @@ baseados em Inteligência Artificial
 </p>
 
 ---
+# Sumário
 
-## 1 Introdução
+1. [Título do Projeto](#título-do-projeto)
+2. [Introdução](#introdução)
+3. [Motivação](#motivação)
+4. [Descrição da Proposta](#descrição-da-proposta)
+5. [Requisitos](#requisitos)
+    - [Requisitos Funcionais](#requisitos-funcionais)
+    - [Requisitos Não Funcionais](#requisitos-não-funcionais)
+6. [Diagrama de Comunicação](#diagrama-de-comunicação)
+7. [Diagrama Elétrico](#diagrama-elétrico)
+8. [Revisão da Literatura](#revisão-da-literatura)
+9. [Metodologia de Desenvolvimento](#metodologia-de-desenvolvimento)
+10. [Resultados Esperados](#resultados-esperados)
+11. [Conclusão](#conclusão)
+12. [Referências](#referências)
+---
+## Introdução
 Este trabalho busca otimizar a eficiência energética, especialmente a potência em sistemas solares fotovoltaicos, usando técnicas de inteligência artificial (IA) para o rastreamento do ponto de máxima potência (MPPT) em condições de sombreamento parcial. Diante dos desafios causados pelos múltiplos picos locais na curva P-V, o estudo analisou referências e realizou simulações no software PLECS com o método de Otimização por Enxame de Partículas (PSO). Os resultados demonstraram que métodos de IA melhoram a identificação do ponto de máxima potência global (GMPP) sob sombreamento, aumentando a eficiência da geração fotovoltaica.
 
-## 2 Motivação
+## Motivação
 Nas últimas décadas, fontes de energia renováveis vêm ganhando destaque devido ao aumento do consumo global de energia elétrica, associado principalmente ao crescimento populacional. O uso excessivo de combustíveis fósseis tem intensificado a poluição e o aquecimento global, impulsionando o interesse em alternativas renováveis, como a energia solar fotovoltaica (PV), favorecida por políticas públicas e redução de custos. Embora a geração PV seja confiável e sustentável, enfrenta desafios como o alto custo inicial, baixa eficiência sob certas condições e sua intermitência. Para melhorar a produção, pesquisadores têm investido no desenvolvimento de células mais eficientes e em dispositivos de rastreamento do ponto de máxima potência (MPPT) (HEGAZY; SHOKAIR; SAAD, 2023; JIN et al., 2017).
 
 Os MPPTs, compostos por conversores CC-CC e sistemas de controle embarcados, utilizam algoritmos como Perturba e Observa (P&O), Condutância Incremental (INC) e Tensão Constante (CV) (VILLEGAS-MIER et al., 2021; GRUNER et al., 2023). Contudo, esses métodos tradicionais têm dificuldades em condições de sombreamento parcial (PSC), onde múltiplos pontos de máximo locais (LMPPs) surgem, dificultando a identificação do ponto de máxima potência global (GMPP) (YAP; SARIMUTHU; LIM, 2020).
 
 Para superar essas limitações, técnicas de inteligência artificial (AI) como Enxame de Partículas (PSO), têm sido aplicados, proporcionando maior precisão e eficiência (YAP; SARIMUTHU; LIM, 2020). Diante disso, este trabalho propõe a aplicação do metodo (PSO) ao MPPT sob sombreamento parcial, com a implementação desta técnica, proponse um almento da eficiencia energetica
 
-## 3 Descrição da Proposta
+## Descrição da Proposta
 Serão desenvolvidos dois hardwares: um conversor CC-CC (Conversor Boost) e um controlador baseado no ESP8266 com sensor INA226. Esses dispositivos serão responsáveis por analisar e controlar o passo de cálculo no conversor CC-CC. Os resultados obtidos, influenciados pela aplicação do método PSO, afetarão o ajuste do passo de cálculo e serão enviados para a plataforma Zabbix.
 
-## 4. Requisitos
+## Requisitos
 
-## 4.1 REQUISITOS FUNCIONAIS
+## REQUISITOS FUNCIONAIS
 Os requisitos funcionais definem as principais funcionalidades que o protótipo do sistema deverá oferecer para garantir a integração eficaz entre o conversor Boost, o controlador baseado em ESP8266 e a plataforma de monitoramento Zabbix. As principais funcionalidades são:
 
 - **Controle dinâmico do conversor Boost:** O protótipo deverá permitir o ajuste automático do duty cycle do conversor CC-CC (Boost), com base nas leituras de corrente, tensão e potência fornecidas pelo sensor INA226, em tempo real.
@@ -48,7 +64,7 @@ Os requisitos funcionais definem as principais funcionalidades que o protótipo 
 
 - **Ajuste automático baseado em monitoramento:** Com base nos dados monitorados pelo Zabbix, o sistema deverá permitir ajustes automáticos de parâmetros de operação, caso sejam detectados desvios de desempenho ou falhas.
 
-## 4.2 REQUISITOS NÃO FUNCIONAIS
+## REQUISITOS NÃO FUNCIONAIS
 
 - **Desempenho:** O protótipo deverá garantir tempos de resposta baixos para leitura dos sensores, aplicação do algoritmo PSO e envio dos dados ao Zabbix, assegurando uma operação em tempo real.
 
@@ -62,7 +78,7 @@ Os requisitos funcionais definem as principais funcionalidades que o protótipo 
 
 - **Eficiência no uso de recursos:** O firmware do ESP8266 deverá otimizar o uso de memória e processamento, assegurando um consumo energético reduzido, ideal para aplicações em ambientes com restrições de energia.
 
-## 5. Diagrama de Comunicação
+## Diagrama de Comunicação
 
 ## 5.1 Descrição Geral
 
@@ -185,7 +201,7 @@ Módulo Solar → Entrada VCC → C11 → L2 → (Q1 controlado por U1) → D1 �
           Coleta de Dados → Zabbix (via rede Wi-Fi)
 ```
 
-## 7. Revisão da Literatura
+## Revisão da Literatura
 A otimização do ponto de máxima potência (MPPT - Maximum Power Point Tracking) em sistemas fotovoltaicos tem sido um campo de intensa pesquisa e desenvolvimento, especialmente com o advento de técnicas mais avançadas de controle e inteligência computacional. Diversos métodos têm sido explorados para melhorar a eficiência dos sistemas fotovoltaicos, abordando diferentes desafios, como as variações nas condições de irradiação e temperatura, e o impacto do sombreamento parcial nos módulos fotovoltaicos.
 
 #### Pesquisas e Trabalhos Relevantes
@@ -210,7 +226,7 @@ Em termos de metodologias, a utilização de técnicas híbridas, como a combina
 
 ---
 
-## 8. Metodologia de Desenvolvimento
+## Metodologia de Desenvolvimento
 Para atingir os objetivos propostos neste trabalho, a metodologia adotada será dividida nas seguintes etapas:
 
 ### 8.1. **Revisão Bibliográfica**
@@ -247,7 +263,7 @@ A metodologia adotada será **iterativa e empírica**, com ciclos contínuos de 
 Com essa metodologia, espera-se contribuir para o avanço de sistemas embarcados inteligentes aplicados à energia solar, demonstrando como a integração entre controle inteligente (PSO), eletrônica de potência (Boost), sensores e monitoramento remoto (Zabbix) pode melhorar significativamente o desempenho e a capacidade de supervisão de sistemas fotovoltaicos.
 
 ---
-## 9. Resultados Esperados
+## Resultados Esperados
 O principal resultado esperado ao final deste projeto é a implementação bem-sucedida de um sistema de controle e monitoramento para um **Conversor Boost aplicado a sistemas fotovoltaicos**, utilizando um **microcontrolador ESP8266** em conjunto com um sensor INA226 e integração com a plataforma **Zabbix**. O objetivo é garantir a otimização da extração de energia em tempo real, com monitoramento remoto dos parâmetros elétricos do sistema. Espera-se alcançar os seguintes resultados:
 
 - **Controle Eficiente do Ponto de Máxima Potência (MPPT)**:  
@@ -266,14 +282,14 @@ O principal resultado esperado ao final deste projeto é a implementação bem-s
    O uso do Zabbix permitirá que o sistema seja escalado futuramente, integrando diversos conversores em diferentes pontos, com centralização dos dados em um único painel de controle.
    
 ---
-## 10. Conclusão
+## Conclusão
 Este trabalho propôs a aplicação da técnica de Otimização por Enxame de Partículas (PSO) para o rastreamento do ponto de máxima potência (MPPT) em sistemas fotovoltaicos, visando a otimização da eficiência energética, especialmente em condições de sombreamento parcial. A implementação da técnica no controle do conversor Boost, integrado com o microcontrolador ESP8266 e o sensor INA226, demonstrou a viabilidade de melhorar a eficiência de geração solar através de um controle dinâmico e inteligente. O envio dos dados para a plataforma Zabbix garantiu o monitoramento remoto e a análise em tempo real dos parâmetros do sistema, proporcionando uma solução robusta e eficiente para o gerenciamento de sistemas fotovoltaicos.
 
 A importância desse projeto reside não apenas na melhoria da eficiência de sistemas fotovoltaicos, mas também na contribuição para a aplicação de técnicas avançadas de inteligência artificial em soluções práticas de energia renovável. Espera-se que, com a continuação do desenvolvimento e a realização de mais testes, este sistema possa ser escalado para ambientes com múltiplos módulos solares.
 
 A escalabilidade do sistema é uma das principais expectativas futuras. Com o uso de múltiplos conversores Boost e a integração com diferentes plataformas de monitoramento, o sistema pode ser adaptado para operar em larga escala, com monitoramento de vários sistemas simultaneamente. Além disso, melhorias podem ser feitas no algoritmo PSO, incorporando técnicas de aprendizado de máquina para ajustes mais precisos e rápidos em tempo real. Podendo expandir ainda mais a eficiência e flexibilidade da solução, especialmente quando se utiliza um FPGA como controlador central. O FPGA oferece a vantagem de processamento paralelo e alta velocidade, permitindo um controle mais preciso e rápido das variáveis do sistema fotovoltaico. A implementação do sistema em diferentes tipos de instalações fotovoltaicas exigirá uma revisão detalhada do layout da placa, visando otimizar o espaço, minimizar interferências e garantir um desempenho eficiente mesmo em ambientes de alta carga térmica.Para que o conversor boost opere de maneira eficiente, seria necessário melhorar a robustez da placa e integrar sistemas de proteção que garantam o funcionamento seguro e estável, especialmente em condições adversas de carga e temperatura.
 
-## 11. Referências
+## Referências
 AL-MAJIDI, S. D.; ABBOD, M. F.; AL-RAWESHIDY, H. S. Design of an ann-based smart
 mppt using real data from photovoltaic systems. In: 2019 54th International Universities
 Power Engineering Conference (UPEC). [S.l.: s.n.], 2019. p. 1–6. Citado na página [4].
