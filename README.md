@@ -186,8 +186,6 @@ Módulo Solar → Entrada VCC → C11 → L2 → (Q1 controlado por U1) → D1 �
 ```
 
 ## 7. Revisão da Literatura
-### Revisão da Literatura
-
 A otimização do ponto de máxima potência (MPPT - Maximum Power Point Tracking) em sistemas fotovoltaicos tem sido um campo de intensa pesquisa e desenvolvimento, especialmente com o advento de técnicas mais avançadas de controle e inteligência computacional. Diversos métodos têm sido explorados para melhorar a eficiência dos sistemas fotovoltaicos, abordando diferentes desafios, como as variações nas condições de irradiação e temperatura, e o impacto do sombreamento parcial nos módulos fotovoltaicos.
 
 #### Pesquisas e Trabalhos Relevantes
@@ -269,8 +267,11 @@ O principal resultado esperado ao final deste projeto é a implementação bem-s
    
 ---
 ## 10. Conclusão
-- Resumo da proposta e considerações sobre a importância do projeto.
-- Expectativas futuras em relação à escalabilidade, melhorias ou aplicações futuras do projeto.
+Este trabalho propôs a aplicação da técnica de Otimização por Enxame de Partículas (PSO) para o rastreamento do ponto de máxima potência (MPPT) em sistemas fotovoltaicos, visando a otimização da eficiência energética, especialmente em condições de sombreamento parcial. A implementação da técnica no controle do conversor Boost, integrado com o microcontrolador ESP8266 e o sensor INA226, demonstrou a viabilidade de melhorar a eficiência de geração solar através de um controle dinâmico e inteligente. O envio dos dados para a plataforma Zabbix garantiu o monitoramento remoto e a análise em tempo real dos parâmetros do sistema, proporcionando uma solução robusta e eficiente para o gerenciamento de sistemas fotovoltaicos.
+
+A importância desse projeto reside não apenas na melhoria da eficiência de sistemas fotovoltaicos, mas também na contribuição para a aplicação de técnicas avançadas de inteligência artificial em soluções práticas de energia renovável. Espera-se que, com a continuação do desenvolvimento e a realização de mais testes, este sistema possa ser escalado para ambientes com múltiplos módulos solares.
+
+A escalabilidade do sistema é uma das principais expectativas futuras. Com o uso de múltiplos conversores Boost e a integração com diferentes plataformas de monitoramento, o sistema pode ser adaptado para operar em larga escala, com monitoramento de vários sistemas simultaneamente. Além disso, melhorias podem ser feitas no algoritmo PSO, incorporando técnicas de aprendizado de máquina para ajustes mais precisos e rápidos em tempo real. Podendo expandir ainda mais a eficiência e flexibilidade da solução, especialmente quando se utiliza um FPGA como controlador central. O FPGA oferece a vantagem de processamento paralelo e alta velocidade, permitindo um controle mais preciso e rápido das variáveis do sistema fotovoltaico. A implementação do sistema em diferentes tipos de instalações fotovoltaicas exigirá uma revisão detalhada do layout da placa, visando otimizar o espaço, minimizar interferências e garantir um desempenho eficiente mesmo em ambientes de alta carga térmica.Para que o conversor boost opere de maneira eficiente, seria necessário melhorar a robustez da placa e integrar sistemas de proteção que garantam o funcionamento seguro e estável, especialmente em condições adversas de carga e temperatura.
 
 ## 11. Referências
 AL-MAJIDI, S. D.; ABBOD, M. F.; AL-RAWESHIDY, H. S. Design of an ann-based smart
