@@ -132,7 +132,7 @@ O sistema inicia no **Módulo Fotovoltaico**, que é responsável pela geração
 - **Monitoramento de Dados**: O ESP lê os dados de energia e publica no sistema de armazenamento.
 - **Visualização**: O Zabbix coleta os dados armazenados e apresenta ao usuário via interface web.
 
-## 6. Diagrama Elétrico
+## Diagrama Elétrico
 ### ➔ Visão Geral
 O circuito é um **Conversor Boost** que:
 - Recebe uma tensão de entrada (provavelmente do seu **módulo fotovoltaico**),
