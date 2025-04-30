@@ -117,8 +117,7 @@ O sistema inicia no **Módulo Fotovoltaico**, que é responsável pela geração
 3. **Monitoramento de Dados**: O ESP lê os dados de energia e publica no sistema de armazenamento.
 4. **Visualização**: O Zabbix coleta os dados armazenados e apresenta ao usuário via interface web.
 
-## 6. Diagrama Elétrico (se houver)
-
+## 6. Diagrama Elétrico
 ### ➔ Visão Geral
 O circuito é um **Conversor Boost** que:
 - Recebe uma tensão de entrada (provavelmente do seu **módulo fotovoltaico**),
@@ -228,9 +227,23 @@ Com essa metodologia, espera-se contribuir para o avanço de sistemas embarcados
 
 ---
 ## 9. Resultados Esperados
-- Descrição dos principais resultados esperados ao final do projeto.
-- Impacto no monitoramento, automação ou coleta de dados, caso seja relevante.
-- Possíveis melhorias ou benefícios proporcionados pela solução.
+O principal resultado esperado ao final deste projeto é a implementação bem-sucedida de um sistema de controle e monitoramento para um **Conversor Boost aplicado a sistemas fotovoltaicos**, utilizando um **microcontrolador ESP8266** em conjunto com um sensor INA226 e integração com a plataforma **Zabbix**. O objetivo é garantir a otimização da extração de energia em tempo real, com monitoramento remoto dos parâmetros elétricos do sistema. Espera-se alcançar os seguintes resultados:
+
+1. **Controle Eficiente do Ponto de Máxima Potência (MPPT)**:  
+   Através da implementação de um algoritmo de otimização (como o PSO), espera-se que o sistema seja capaz de ajustar dinamicamente o duty cycle do conversor Boost, extraindo a máxima potência possível do módulo fotovoltaico mesmo em condições ambientais variáveis.
+
+2. **Monitoramento Remoto via Zabbix**:  
+   O ESP8266 será responsável por coletar dados de tensão, corrente e potência do sistema e transmiti-los em tempo real para a plataforma Zabbix. Isso permitirá o acompanhamento contínuo do desempenho do sistema e a geração de alertas em caso de falhas ou desvios operacionais.
+
+3. **Aquisição e Armazenamento de Dados**:  
+   Os dados enviados ao Zabbix poderão ser armazenados em um banco de dados (como o MySQL) para posterior análise, possibilitando estudos sobre comportamento energético, eficiência do sistema e condições de operação ao longo do tempo.
+
+4. **Eficiência Energética e Autonomia**:  
+   Com o controle inteligente do conversor e a análise em tempo real, espera-se aumentar a eficiência energética do sistema como um todo, reduzindo perdas e otimizando o uso da energia gerada. Isso pode contribuir para maior autonomia em aplicações embarcadas ou off-grid.
+
+5. **Escalabilidade para Monitoramento de Múltiplos Dispositivos**:  
+   O uso do Zabbix permitirá que o sistema seja escalado futuramente, integrando diversos conversores em diferentes pontos, com centralização dos dados em um único painel de controle.
+
 ## 10. Conclusão
 - Resumo da proposta e considerações sobre a importância do projeto.
 - Expectativas futuras em relação à escalabilidade, melhorias ou aplicações futuras do projeto.
