@@ -21,20 +21,19 @@ baseados em Inteligência Artificial
 ---
 # Sumário
 
-1. [Título do Projeto](#título-do-projeto)
-2. [Introdução](#introdução)
-3. [Motivação](#motivação)
-4. [Descrição da Proposta](#descrição-da-proposta)
-5. [Requisitos](#requisitos)
+1. [Introdução](#introdução)
+2. [Motivação](#motivação)
+3. [Descrição da Proposta](#descrição-da-proposta)
+4. [Requisitos](#requisitos)
     - [Requisitos Funcionais](#requisitos-funcionais)
     - [Requisitos Não Funcionais](#requisitos-não-funcionais)
-6. [Diagrama de Comunicação](#diagrama-de-comunicação)
-7. [Diagrama Elétrico](#diagrama-elétrico)
-8. [Revisão da Literatura](#revisão-da-literatura)
-9. [Metodologia de Desenvolvimento](#metodologia-de-desenvolvimento)
-10. [Resultados Esperados](#resultados-esperados)
-11. [Conclusão](#conclusão)
-12. [Referências](#referências)
+5. [Diagrama de Comunicação](#diagrama-de-comunicação)
+6. [Diagrama Elétrico](#diagrama-elétrico)
+7. [Revisão da Literatura](#revisão-da-literatura)
+8. [Metodologia de Desenvolvimento](#metodologia-de-desenvolvimento)
+9. [Resultados Esperados](#resultados-esperados)
+10. [Conclusão](#conclusão)
+11. [Referências](#referências)
 ---
 ## Introdução
 Este trabalho busca otimizar a eficiência energética, especialmente a potência em sistemas solares fotovoltaicos, usando técnicas de inteligência artificial (IA) para o rastreamento do ponto de máxima potência (MPPT) em condições de sombreamento parcial. Diante dos desafios causados pelos múltiplos picos locais na curva P-V, o estudo analisou referências e realizou simulações no software PLECS com o método de Otimização por Enxame de Partículas (PSO). Os resultados demonstraram que métodos de IA melhoram a identificação do ponto de máxima potência global (GMPP) sob sombreamento, aumentando a eficiência da geração fotovoltaica.
