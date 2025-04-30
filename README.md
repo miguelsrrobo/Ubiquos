@@ -186,9 +186,32 @@ Módulo Solar → Entrada VCC → C11 → L2 → (Q1 controlado por U1) → D1 �
 ```
 
 ## 7. Revisão da Literatura
-- Pesquisas e trabalhos relevantes já realizados sobre o tema.
-- Comparação entre a solução proposta e as soluções existentes.
-- Tecnologias, metodologias e ferramentas mais modernas utilizadas na área.
+### Revisão da Literatura
+
+A otimização do ponto de máxima potência (MPPT - Maximum Power Point Tracking) em sistemas fotovoltaicos tem sido um campo de intensa pesquisa e desenvolvimento, especialmente com o advento de técnicas mais avançadas de controle e inteligência computacional. Diversos métodos têm sido explorados para melhorar a eficiência dos sistemas fotovoltaicos, abordando diferentes desafios, como as variações nas condições de irradiação e temperatura, e o impacto do sombreamento parcial nos módulos fotovoltaicos.
+
+#### Pesquisas e Trabalhos Relevantes
+
+Vários estudos e trabalhos têm contribuído significativamente para a melhoria dos algoritmos MPPT. Por exemplo, o trabalho de AL-MAJIDI et al. (2019) apresenta um MPPT baseado em redes neurais artificiais (ANN) utilizando dados reais de sistemas fotovoltaicos, abordando a adaptação do algoritmo às condições climáticas variáveis, o que é crucial para a operação eficiente de sistemas fotovoltaicos em diferentes locais e condições (AL-MAJIDI et al., 2019). Por outro lado, DIVYASHARON et al. (2019) exploram a utilização de uma rede neural artificial em conjunto com a topologia de conversor Cuk, oferecendo uma solução robusta para sistemas fotovoltaicos em condições climáticas variáveis, destacando a importância da integração de técnicas de controle inteligentes (DIVYASHARON et al., 2019).
+
+A comparação entre técnicas de MPPT também tem sido um tópico importante de pesquisa. BATARSEH e ZA’TER (2018) realizaram uma análise comparativa das técnicas híbridas de MPPT, sugerindo novas classificações e combinações não exploradas anteriormente, o que ajuda a entender melhor a aplicabilidade e os limites de cada abordagem em diferentes cenários (BATARSEH & ZA’TER, 2018). Além disso, o trabalho de KANDEMIR et al. (2018) compara métodos de controle fuzzy com a técnica de condutância incremental, abordando as vantagens e limitações de cada um em termos de desempenho e complexidade (KANDEMIR et al., 2018).
+
+#### Comparação entre a Solução Proposta e as Soluções Existentes
+
+Em relação às soluções existentes, os algoritmos baseados em redes neurais, como o proposto por AL-MAJIDI et al. (2019), oferecem uma grande vantagem na adaptação a diferentes condições de operação, ajustando-se dinamicamente às variáveis ambientais. Comparado a métodos tradicionais como o MPPT baseado em condutância incremental, que tem um desempenho satisfatório em condições estáveis, os algoritmos baseados em redes neurais podem superar esses métodos em cenários de variação rápida e intensa da irradiação solar (GRUNER et al., 2023). No entanto, a complexidade computacional e a necessidade de treinamento prévio das redes neurais são desafios significativos.
+
+Por outro lado, soluções baseadas em lógica difusa, como as de ALGARíN et al. (2017) e SURYOATMOJO et al. (2018), têm mostrado ser eficientes em ambientes com alto grau de incerteza, como no controle de veículos aéreos não tripulados movidos a energia solar (ALGARíN et al., 2017; SURYOATMOJO et al., 2018). A principal vantagem desses métodos é a simplicidade e a capacidade de operar em tempo real, sem a necessidade de treinamento de modelos complexos, o que os torna mais adequados para sistemas com recursos limitados, como o uso em microinversores (KNABBEN et al., 2017).
+
+#### Tecnologias, Metodologias e Ferramentas Mais Modernas
+
+As tecnologias mais modernas no campo do MPPT incluem o uso de inteligência artificial, como redes neurais artificiais e lógica difusa, que têm sido cada vez mais aplicadas para melhorar a precisão e a adaptabilidade dos sistemas fotovoltaicos. A integração de algoritmos de otimização, como o PSO (Particle Swarm Optimization), também tem sido explorada para maximizar a eficiência dos sistemas, permitindo ajustes dinâmicos e autônomos do ponto de máxima potência, com base em variáveis ambientais e operacionais (PACHECO, 2016).
+
+Além disso, a utilização de plataformas de hardware como o Arduino, mencionada por ALGARíN et al. (2017), tem facilitado a implementação de soluções de baixo custo para MPPT em sistemas fotovoltaicos. Ferramentas de modelagem e simulação, como MATLAB e Simulink, também são amplamente utilizadas para testar e validar algoritmos MPPT antes de sua implementação prática, proporcionando uma abordagem eficaz para o design de sistemas fotovoltaicos (SCHMITZ et al., 2018; PEREIRA et al., 2021).
+
+Em termos de metodologias, a utilização de técnicas híbridas, como a combinação de algoritmos genéticos com algoritmos de firefly, foi explorada por HUANG et al. (2018), demonstrando uma abordagem promissora para otimizar o rastreamento do ponto de máxima potência sob condições de sombreamento parcial (HUANG et al., 2018). A aplicação dessas metodologias avançadas permite maior robustez e flexibilidade, especialmente em cenários desafiadores, como o sombreamento dinâmico.
+
+---
+
 ## 8. Metodologia de Desenvolvimento
 Para atingir os objetivos propostos neste trabalho, a metodologia adotada será dividida nas seguintes etapas:
 
