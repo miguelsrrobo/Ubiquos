@@ -32,10 +32,14 @@ baseados em Inteligência Artificial
 7. [Revisão da Literatura](#revisão-da-literatura)
 8. [Metodologia de Desenvolvimento](#metodologia-de-desenvolvimento)
 9. [Documentação do Código](#documentação-do-código)
-10. [Configuração do Zabbix](#configuração-do-zabbix)
-11. [Resultados Esperados](#resultados-esperados)
-12. [Conclusão](#conclusão)
-13. [Referências](#referências)
+    - [Ambiente de Desenvolvimento](#ambiente-de-desenvolvimento)
+    - [Instalação](#instalação)
+    - [Modelo Matematico](#modelo-matematico)
+    - [Programa Final](#programa-final)
+11. [Configuração do Zabbix](#configuração-do-zabbix)
+12. [Resultados Esperados](#resultados-esperados)
+13. [Conclusão](#conclusão)
+14. [Referências](#referências)
 ---
 ## Introdução
 Este trabalho busca otimizar a eficiência energética, especialmente a potência em sistemas solares fotovoltaicos, usando técnicas de inteligência artificial (IA) para o rastreamento do ponto de máxima potência (MPPT) em condições de sombreamento parcial. Diante dos desafios causados pelos múltiplos picos locais na curva P-V, o estudo analisou referências e realizou simulações no software PLECS com o método de Otimização por Enxame de Partículas (PSO). Os resultados demonstraram que métodos de IA melhoram a identificação do ponto de máxima potência global (GMPP) sob sombreamento, aumentando a eficiência da geração fotovoltaica.
@@ -266,12 +270,17 @@ Com essa metodologia, espera-se contribuir para o avanço de sistemas embarcados
 ---
 ## Documentação do Código
 
+### Ambiente de Desenvolvimento
+
+### Instalação
+### Modelo Matematico
+### Programa Final
 
 
 ---
 
 
-## Configuração de Software
+## Configuração de Zabbix
 
 
 
