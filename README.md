@@ -14,8 +14,7 @@ Miguel Garcia Silvestre
 </p>
 
 <p align = "center">
-Estudo de Algoritmos de MPPT para Sistemas Solares Fotovoltaicos
-baseados em Inteligência Artificial
+Aumento da Eficiência do MPPT em Sistemas Solares por Meio de Método de Inteligência Artificial PSO
 </p>
 
 ---
