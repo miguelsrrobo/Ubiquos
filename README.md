@@ -1,6 +1,5 @@
-<p align = "center">
-Aumento da Eficiência do MPPT em Sistemas Solares por Meio de Método de Inteligência Artificial PSO
-</p>
+# Aumento da Eficiência do MPPT em Sistemas Solares por Meio de Método de Inteligência Artificial PSO
+
 
 ---
 # Sumário
