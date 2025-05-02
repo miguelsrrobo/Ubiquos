@@ -270,9 +270,92 @@ Com essa metodologia, espera-se contribuir para o avanço de sistemas embarcados
 ## Documentação do Código
 
 ### Ambiente de Desenvolvimento
-
+A implementação do programa foi realizada utilizando a Arduino IDE, um ambiente de desenvolvimento que possibilita criar e transferir códigos para microcontroladores compatíveis. Neste trabalho, foi utilizada a placa ESP32, que é suportada por essa plataforma.
 ### Instalação
+
+### 🔽 1. **Baixar o Arduino IDE**
+
+* Acesse o site oficial: [https://www.arduino.cc/en/software](https://www.arduino.cc/en/software)
+* Escolha seu sistema operacional:
+
+  * **Windows** (EXE Installer ou ZIP)
+  * **macOS**
+  * **Linux** (32-bit, 64-bit ou ARM)
+
+---
+
+### 💻 2. **Instalação no Windows**
+
+1. Baixe o instalador `.exe`.
+2. Execute o arquivo e siga os passos do assistente.
+3. Marque as opções:
+
+   * Instalar drivers
+   * Associar arquivos `.ino`
+4. Clique em **Install**.
+5. Após a instalação, abra o Arduino IDE.
+
+---
+
+### 🍏 3. **Instalação no macOS**
+
+1. Baixe o arquivo `.zip` para macOS.
+2. Extraia e arraste o ícone do **Arduino** para a pasta **Aplicativos**.
+3. Pode ser necessário permitir a execução nas **Preferências do Sistema > Segurança e Privacidade**.
+4. Abra o Arduino IDE.
+
+---
+
+### 🐧 4. **Instalação no Linux (Ubuntu/Debian)**
+
+**Via terminal:**
+
+```bash
+sudo apt update
+sudo apt install arduino
+```
+
+**Ou manualmente:**
+
+1. Baixe o pacote `.tar.xz`.
+2. Extraia o conteúdo:
+
+   ```bash
+   tar -xvf arduino-*.tar.xz
+   ```
+3. Acesse a pasta extraída e execute o instalador:
+
+   ```bash
+   cd arduino-*
+   sudo ./install.sh
+   ```
+---
+
+### 🧩 5. **Instalar suporte à placa (ex: ESP32, ESP8266)**
+
+1. Abra o Arduino IDE.
+2. Vá em **Arquivo > Preferências**.
+3. No campo **URLs Adicionais para Gerenciadores de Placas**, adicione:
+
+   * **ESP8266:** `http://arduino.esp8266.com/stable/package_esp8266com_index.json`
+   * **ESP32:** `https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32_index.json`
+4. Vá em **Ferramentas > Placa > Gerenciador de Placas**.
+5. Pesquise por **ESP32** ou **ESP8266** e clique em **Instalar**.
+
+---
+
+### ✅ 6. **Testar a Instalação**
+
+1. Conecte a placa ao PC via USB.
+2. Vá em **Ferramentas > Placa** e selecione o modelo correto.
+3. Vá em **Ferramentas > Porta** e selecione a porta serial da placa.
+4. Abra o exemplo **Arquivo > Exemplos > 01.Basics > Blink**.
+5. Clique em **Upload** (seta para a direita).
+6. Se tudo estiver certo, o LED da placa piscará.
+
 ### Modelo Matematico
+
+
 ### Programa Final
 
 
