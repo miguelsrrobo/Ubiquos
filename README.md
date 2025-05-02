@@ -356,12 +356,9 @@ sudo apt install arduino
 ### Modelo Matematico
 
 
-### Programa Final
-
-
----
-
 ## Configuração de Zabbix
+O Zabbix é uma plataforma de monitoramento de redes, servidores, aplicações e dispositivos IoT. Ele é gratuito e de código aberto, muito usado em ambientes corporativos para garantir que tudo esteja funcionando corretamente e para alertar quando algo dá errado.
+
 ## 1. Pré-requisitos
 
 Escolha a sua plataforma de trabalho:
@@ -467,8 +464,7 @@ systemctl enable zabbix-server zabbix-agent apache2
 http://host/zabbix
 ```
 
----
-
+Outras instalação siga o link: <https://github.com/miguelsrrobo/Obiquos/tree/main/Zabbix>
 
 ---
 ## Resultados Esperados
@@ -488,7 +484,7 @@ O principal resultado esperado ao final deste projeto é a implementação bem-s
 
 - **Escalabilidade para Monitoramento de Múltiplos Dispositivos**:  
    O uso do Zabbix permitirá que o sistema seja escalado futuramente, integrando diversos conversores em diferentes pontos, com centralização dos dados em um único painel de controle.
-   
+
 ---
 ## Conclusão
 Este trabalho propôs a aplicação da técnica de Otimização por Enxame de Partículas (PSO) para o rastreamento do ponto de máxima potência (MPPT) em sistemas fotovoltaicos, visando a otimização da eficiência energética, especialmente em condições de sombreamento parcial. A implementação da técnica no controle do conversor Boost, integrado com o microcontrolador ESP8266 e o sensor INA226, demonstrou a viabilidade de melhorar a eficiência de geração solar através de um controle dinâmico e inteligente. O envio dos dados para a plataforma Zabbix garantiu o monitoramento remoto e a análise em tempo real dos parâmetros do sistema, proporcionando uma solução robusta e eficiente para o gerenciamento de sistemas fotovoltaicos.
