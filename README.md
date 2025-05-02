@@ -356,7 +356,12 @@ Resistencia de gate drive
 
 
 ### INA226
-O codigo e mais informação sobre o INA226 estara neste: <linkhttps://github.com/miguelsrrobo/Obiquos/tree/main/INA226>
+O codigo e mais informação sobre o INA226 estara neste link: <linkhttps://github.com/miguelsrrobo/Obiquos/tree/main/INA226>
+
+### Programa Final
+
+O codigo estara neste link: <https://github.com/miguelsrrobo/Obiquos/blob/main/BOOST/mqtt/mqtt.ino>
+
 
 ## Configuração do Zabbix
 O Zabbix é uma plataforma de monitoramento de redes, servidores, aplicações e dispositivos IoT. Ele é gratuito e de código aberto, muito usado em ambientes corporativos para garantir que tudo esteja funcionando corretamente e para alertar quando algo dá errado.
