@@ -361,9 +361,113 @@ sudo apt install arduino
 
 ---
 
-
 ## Configuração de Zabbix
+## 1. Pré-requisitos
 
+Escolha a sua plataforma de trabalho:
+
+| Banco de Dados | Servidor Web |
+|--------------|--------------|
+| MySQL       | Apache       |
+| PostgreSQL  | Nginx        |
+
+Instale os pacotes necessários conforme sua escolha:
+
+| Ferramenta  | Comando de Instalação |
+|------------|-----------------------|
+| MySQL      | `apt install mysql-server` |
+| PostgreSQL | `apt install postgresql postgresql-contrib` |
+| Apache     | `apt install apache2` |
+| Nginx      | `apt install nginx` |
+
+Certifique-se de instalar os pacotes antes de iniciar a instalação do Zabbix.
+
+---
+
+## 2. Instalação e Configuração do Zabbix
+
+### 2.1. Instalação do Zabbix com MySQL e Apache
+
+#### a) Acessar como Root
+
+```sh
+sudo -s
+```
+
+#### b) Adicionar o Repositório do Zabbix
+
+```sh
+wget https://repo.zabbix.com/zabbix/7.2/release/ubuntu/pool/main/z/zabbix-release/zabbix-release_latest_7.2+ubuntu24.04_all.deb
+
+dpkg -i zabbix-release_latest_7.2+ubuntu24.04_all.deb
+
+apt update
+```
+
+#### c) Instalar Pacotes do Zabbix
+
+```sh
+apt install zabbix-server-mysql zabbix-frontend-php zabbix-apache-conf zabbix-sql-scripts zabbix-agent
+```
+
+#### d) Configurar o Banco de Dados MySQL
+Obs.: ao configurar o banco de dados, seja MySQL ou PostgreSQL, em alguns computadores pode demorar muito (alguns até 1h!) então se você achar que seu terminal travou, NÃO FAÇA NADA, se cancelar essa parte poderá dar problemas ao tentar de novo.
+
+```sh
+mysql -uroot -p
+```
+Digite a senha do root do MySQL e execute:
+
+```sql
+mysql> create database zabbix character set utf8mb4 collate utf8mb4_bin;
+mysql> create user zabbix@localhost identified by 'password';
+mysql> grant all privileges on zabbix.* to zabbix@localhost;
+mysql> set global log_bin_trust_function_creators = 1;
+mysql> quit; 
+```
+
+Importar esquema inicial:
+
+```sh
+zcat /usr/share/zabbix/sql-scripts/mysql/server.sql.gz | mysql --default-character-set=utf8mb4 -uzabbix -p zabbix
+```
+
+Desabilitar `log_bin_trust_function_creators`:
+
+```sh
+mysql -uroot -p
+SET GLOBAL log_bin_trust_function_creators = 0;
+QUIT;
+```
+
+#### e) Configurar o Zabbix Server
+
+Edite o arquivo:
+
+```sh
+nano /etc/zabbix/zabbix_server.conf
+```
+
+Ajuste a linha:
+
+```sh
+DBPassword=senha_segura
+```
+
+#### f) Reiniciar e Habilitar os Serviços
+
+```sh
+systemctl restart zabbix-server zabbix-agent apache2
+systemctl enable zabbix-server zabbix-agent apache2
+```
+
+#### g) Acessar a Interface Web
+
+```
+http://host/zabbix
+```
+
+---
 
 
 ---
