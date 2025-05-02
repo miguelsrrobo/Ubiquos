@@ -356,6 +356,21 @@ sudo apt install arduino
 
 ### Modelo Matematico
 
+<p align = "center">
+  <img src="https://github.com/miguelsrrobo/Obiquos/blob/main/Imagens/WhatsApp%20Image%202025-05-02%20at%2018.25.06%20(1).jpeg" alt="Rinha logo" width="30%" />
+</p>
+<p align = "center">
+  <img src="https://github.com/miguelsrrobo/Obiquos/blob/main/Imagens/WhatsApp%20Image%202025-05-02%20at%2018.25.06.jpeg" alt="Rinha logo" width="30%" />
+</p>
+
+Resistencia de gate drive
+<p align = "center">
+  <img src="https://github.com/miguelsrrobo/Obiquos/blob/main/Imagens/WhatsApp%20Image%202025-05-02%20at%2018.25.05.jpeg" alt="Rinha logo" width="30%" />
+</p>
+
+
+
+
 ### INA226
 O codigo e mais informação sobre o INA226 estara neste: <linkhttps://github.com/miguelsrrobo/Obiquos/tree/main/INA226>
 
