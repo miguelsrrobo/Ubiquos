@@ -1,19 +1,4 @@
 <p align = "center">
-  <img src="https://github.com/miguelsrrobo/Obiquos/blob/main/Imagens/logo_ufsc1.png" alt="Rinha logo" width="30%" />
-</p>
-
-
-<p align = "center">
-UNIVERSIDADE FEDERAL DE SANTA CATARINA
-CENTRO DE CIÊNCIAS, TECNOLOGIA E SAÚDE - CAMPUS ARARANGUÁ
-CURSO DE GRADUAÇÃO EM ENGENHARIA DE COMPUTAÇÃO
-</p>
-
-<p align = "center">
-Miguel Garcia Silvestre
-</p>
-
-<p align = "center">
 Aumento da Eficiência do MPPT em Sistemas Solares por Meio de Método de Inteligência Artificial PSO
 </p>
 
