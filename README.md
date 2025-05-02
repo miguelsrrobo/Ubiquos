@@ -34,6 +34,7 @@ Aumento da Eficiência do MPPT em Sistemas Solares por Meio de Método de Inteli
     - [Ambiente de Desenvolvimento](#ambiente-de-desenvolvimento)
     - [Instalação](#instalação)
     - [Modelo Matematico](#modelo-matematico)
+    - [INA226](#ina226)
     - [Programa Final](#programa-final)
 11. [Configuração do Zabbix](#configuração-do-zabbix)
 12. [Resultados Esperados](#resultados-esperados)
@@ -355,6 +356,8 @@ sudo apt install arduino
 
 ### Modelo Matematico
 
+### INA226
+O codigo e mais informação sobre o INA226 estara neste: <linkhttps://github.com/miguelsrrobo/Obiquos/tree/main/INA226>
 
 ## Configuração de Zabbix
 O Zabbix é uma plataforma de monitoramento de redes, servidores, aplicações e dispositivos IoT. Ele é gratuito e de código aberto, muito usado em ambientes corporativos para garantir que tudo esteja funcionando corretamente e para alertar quando algo dá errado.
