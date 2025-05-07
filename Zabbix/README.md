@@ -243,7 +243,7 @@ http://IP/zabbix
 Para consegui o IP da maquina linux no WSL, usase este comando:
 
 ```
-ip addr show eth0 | grap "inet "
+ip addr show eth0 | grep "inet "
 ```
 ---
 ## 5 ESP8266 Zabbix Sender
