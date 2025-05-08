@@ -1,6 +1,5 @@
 # Aumento da Eficiência do MPPT em Sistemas Solares por Meio de Método de Inteligência Artificial PSO
 
-
 ---
 # Sumário
 
@@ -134,7 +133,7 @@ O circuito é um **Conversor Boost** que:
 ---
 
 <p align = "center">
-  <img src="https://github.com/miguelsrrobo/Obiquos/blob/main/Imagens/Screenshot%202025-04-28%20at%2019-16-25%20SCH_Schematic2_2025-04-28.pdf.png" alt="Rinha logo" width="60%" />
+  <img src="https://github.com/miguelsrrobo/Obiquos/blob/main/Imagens/Screenshot%202025-04-28%20at%2019-16-25%20SCH_Schematic2_2025-04-28.pdf.png" alt="esquematico" width="60%" />
 </p>
 
 ---
