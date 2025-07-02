@@ -241,7 +241,7 @@ Para atingir os objetivos propostos neste trabalho, a metodologia adotada será 
 Será realizada uma revisão aprofundada da literatura relacionada a sistemas fotovoltaicos, técnicas de rastreamento do ponto de máxima potência (MPPT), conversores Boost, microcontroladores (em especial o ESP8266), sensores de corrente e tensão (como o INA226), algoritmos de otimização como PSO (Particle Swarm Optimization) e ferramentas de monitoramento como o Zabbix. A revisão incluirá artigos científicos, normas técnicas, manuais de componentes e publicações relevantes.
 
 ### 8.2. **Análise de Tecnologias**
-Serão estudadas as tecnologias e componentes eletrônicos necessários para a construção do protótipo. Isso incluirá a análise dos circuitos de potência (Boost converter), dispositivos de medição, protocolos de comunicação (I2C, MQTT ou HTTP) e o funcionamento da plataforma Zabbix para monitoramento de dados em tempo real.
+Serão estudadas as tecnologias e os componentes eletrônicos necessários para a construção do protótipo. Isso incluirá a análise dos circuitos de potência (conversor Boost), dispositivos de medição, protocolos de comunicação (I2C, HTTP) e o funcionamento da plataforma ThingSpeak para o monitoramento remoto e visualização em tempo real dos dados operacionais do sistema.
 
 ### 8.3. **Desenvolvimento do Protótipo**
 Será implementado um protótipo funcional composto por:
@@ -255,7 +255,7 @@ O protótipo será montado em bancada e testado com alimentação vinda de um m�
 ### 8.4. **Avaliação e Testes**
 Serão realizados testes controlados para avaliar o comportamento do sistema em diferentes cenários, especialmente sob variações de carga e tensão de entrada. Serão analisados:
 - A estabilidade da operação do conversor;
-- A eficiência do algoritmo PSO na busca do ponto de máxima potência;
+- A eficiência do algoritmo Fuzzy na busca do ponto de máxima potência;
 - A confiabilidade da transmissão dos dados para o Zabbix;
 - O tempo de resposta do sistema sob condições dinâmicas.
 
@@ -268,7 +268,7 @@ Todos os dados e observações obtidos ao longo do desenvolvimento e dos testes 
 
 A metodologia adotada será **iterativa e empírica**, com ciclos contínuos de desenvolvimento, teste e refinamento. Essa abordagem permitirá ajustar o comportamento do sistema de forma progressiva, até atingir uma operação estável e eficaz sob diferentes condições.
 
-Com essa metodologia, espera-se contribuir para o avanço de sistemas embarcados inteligentes aplicados à energia solar, demonstrando como a integração entre controle inteligente (PSO), eletrônica de potência (Boost), sensores e monitoramento remoto (Zabbix) pode melhorar significativamente o desempenho e a capacidade de supervisão de sistemas fotovoltaicos.
+Com essa metodologia, espera-se contribuir para o avanço de sistemas embarcados inteligentes aplicados à energia solar, demonstrando como a integração entre controle inteligente (Fuzzy), eletrônica de potência (Boost), sensores e monitoramento remoto (ThingSpeak) pode melhorar significativamente o desempenho e a capacidade de supervisão de sistemas fotovoltaicos.
 
 ---
 ## Documentação do Código
