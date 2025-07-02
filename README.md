@@ -25,14 +25,20 @@
 14. [Referências](#referências)
 ---
 ## Introdução
-Este trabalho busca otimizar a eficiência energética, especialmente a potência em sistemas solares fotovoltaicos, usando técnicas de inteligência artificial (IA) para o rastreamento do ponto de máxima potência (MPPT) em condições de sombreamento parcial. Diante dos desafios causados pelos múltiplos picos locais na curva P-V, o estudo analisou referências e realizou simulações no software PLECS com o método de Otimização por Enxame de Partículas (PSO). Os resultados demonstraram que métodos de IA melhoram a identificação do ponto de máxima potência global (GMPP) sob sombreamento, aumentando a eficiência da geração fotovoltaica.
+
+Este trabalho tem como objetivo otimizar a eficiência energética de sistemas fotovoltaicos, com ênfase no rastreamento do ponto de máxima potência (MPPT) sob condições de sombreamento parcial. Devido à presença de múltiplos picos locais na curva P-V nesses cenários, métodos tradicionais de rastreamento podem falhar em localizar o ponto de máxima potência global (GMPP). Inicialmente, foram realizadas simulações no software PLECS utilizando o algoritmo de Otimização por Enxame de Partículas (PSO), uma técnica de inteligência artificial comumente aplicada em problemas de otimização. No entanto, os resultados obtidos com o PSO mostraram-se inconsistentes e insatisfatórios no contexto estudado, apresentando dificuldades na convergência ao GMPP. Diante disso, optou-se por substituir o PSO pelo controle fuzzy, que demonstrou melhor desempenho na adaptação às variações das condições de irradiância e na identificação eficiente do ponto de máxima potência global, resultando em maior aproveitamento da energia gerada.
 
 ## Motivação
-Nas últimas décadas, fontes de energia renováveis vêm ganhando destaque devido ao aumento do consumo global de energia elétrica, associado principalmente ao crescimento populacional. O uso excessivo de combustíveis fósseis tem intensificado a poluição e o aquecimento global, impulsionando o interesse em alternativas renováveis, como a energia solar fotovoltaica (PV), favorecida por políticas públicas e redução de custos. Embora a geração PV seja confiável e sustentável, enfrenta desafios como o alto custo inicial, baixa eficiência sob certas condições e sua intermitência. Para melhorar a produção, pesquisadores têm investido no desenvolvimento de células mais eficientes e em dispositivos de rastreamento do ponto de máxima potência (MPPT) (HEGAZY; SHOKAIR; SAAD, 2023; JIN et al., 2017).
 
-Os MPPTs, compostos por conversores CC-CC e sistemas de controle embarcados, utilizam algoritmos como Perturba e Observa (P&O), Condutância Incremental (INC) e Tensão Constante (CV) (VILLEGAS-MIER et al., 2021; GRUNER et al., 2023). Contudo, esses métodos tradicionais têm dificuldades em condições de sombreamento parcial (PSC), onde múltiplos pontos de máximo locais (LMPPs) surgem, dificultando a identificação do ponto de máxima potência global (GMPP) (YAP; SARIMUTHU; LIM, 2020).
+Nas últimas décadas, fontes de energia renovável têm ganhado destaque devido ao aumento do consumo global de energia elétrica, impulsionado principalmente pelo crescimento populacional e pelo desenvolvimento urbano. O uso intensivo de combustíveis fósseis tem agravado problemas ambientais, como a poluição e o aquecimento global, o que intensificou o interesse por alternativas sustentáveis, como a energia solar fotovoltaica (PV). Esse interesse tem sido fortalecido por políticas públicas de incentivo e pela redução dos custos de instalação e manutenção dos sistemas solares.
 
-Para superar essas limitações, técnicas de inteligência artificial (AI) como Enxame de Partículas (PSO), têm sido aplicados, proporcionando maior precisão e eficiência (YAP; SARIMUTHU; LIM, 2020). Diante disso, este trabalho propõe a aplicação do metodo (PSO) ao MPPT sob sombreamento parcial, com a implementação desta técnica, proponse um almento da eficiencia energetica
+Apesar de ser uma fonte limpa e renovável, a energia solar fotovoltaica ainda enfrenta desafios relevantes, como o alto custo inicial, a variabilidade na geração de energia e a baixa eficiência em condições adversas, especialmente sob sombreamento parcial. Para mitigar essas limitações, pesquisas têm se concentrado no desenvolvimento de células solares mais eficientes e na otimização de dispositivos de rastreamento do ponto de máxima potência (MPPT), os quais visam maximizar a extração de energia dos painéis solares (HEGAZY; SHOKAIR; SAAD, 2023; JIN et al., 2017).
+
+Os algoritmos tradicionais de MPPT — como Perturba e Observa (P\&O), Condutância Incremental (INC) e Tensão Constante (CV) — apresentam bom desempenho sob irradiância uniforme. Contudo, em situações de sombreamento parcial, nas quais surgem múltiplos picos locais de potência (LMPPs), esses métodos frequentemente falham em localizar o ponto de máxima potência global (GMPP), comprometendo a eficiência do sistema (VILLEGAS-MIER et al., 2021; YAP; SARIMUTHU; LIM, 2020).
+
+Para superar essas limitações, técnicas de inteligência artificial (IA), como o algoritmo de Otimização por Enxame de Partículas (PSO), têm sido amplamente exploradas por sua capacidade de lidar com múltiplos ótimos locais e adaptar-se a condições variáveis. No entanto, durante a implementação deste trabalho, observou-se que o PSO apresentou dificuldades de convergência e instabilidade nos resultados obtidos em teste reais, o que motivou a adoção de uma abordagem alternativa.
+
+Dessa forma, optou-se por utilizar o controle fuzzy como solução para o problema de MPPT em condições de sombreamento parcial. O método fuzzy demonstrou melhor adaptabilidade às mudanças nas condições de irradiância e maior precisão na identificação do GMPP, contribuindo para o aumento da eficiência energética e para a viabilidade técnica dos sistemas fotovoltaicos em cenários reais.
 
 ## Descrição da Proposta
 Serão desenvolvidos dois hardwares: um conversor CC-CC (Conversor Boost) e um controlador baseado no ESP8266 com sensor INA226. Esses dispositivos serão responsáveis por analisar e controlar o passo de cálculo no conversor CC-CC. Os resultados obtidos, influenciados pela aplicação do método PSO, afetarão o ajuste do passo de cálculo e serão enviados para a plataforma Zabbix.
@@ -40,31 +46,45 @@ Serão desenvolvidos dois hardwares: um conversor CC-CC (Conversor Boost) e um c
 ## Requisitos
 
 ## REQUISITOS FUNCIONAIS
-Os requisitos funcionais definem as principais funcionalidades que o protótipo do sistema deverá oferecer para garantir a integração eficaz entre o conversor Boost, o controlador baseado em ESP8266 e a plataforma de monitoramento Zabbix. As principais funcionalidades são:
 
-- **Controle dinâmico do conversor Boost:** O protótipo deverá permitir o ajuste automático do duty cycle do conversor CC-CC (Boost), com base nas leituras de corrente, tensão e potência fornecidas pelo sensor INA226, em tempo real.
+Os requisitos funcionais definem as principais funcionalidades que o protótipo do sistema deverá oferecer para garantir a integração eficaz entre o conversor Boost, o controlador baseado em ESP8266 e a plataforma de monitoramento remoto. As funcionalidades foram planejadas com foco na implementação de MPPT em condições adversas de irradiância:
 
-- **Aplicação do algoritmo PSO:** O sistema deverá implementar o método de Otimização por Enxame de Partículas (PSO) para ajustar o passo de cálculo e maximizar a eficiência energética do conversor.
+* **Controle dinâmico do conversor Boost:**
+  O sistema deverá realizar o ajuste automático do duty cycle do conversor CC-CC (Boost), com base nas leituras em tempo real de corrente, tensão e potência fornecidas pelo sensor INA226.
 
-- **Envio de dados para o Zabbix:** O controlador ESP8266 deverá enviar continuamente os dados de operação (tensão, corrente, potência e duty cycle) para a plataforma Zabbix, em formato adequado (como JSON via MQTT ou HTTP).
+* **Aplicação do controle fuzzy:**
+  O sistema deverá empregar um controlador fuzzy para ajustar o duty cycle, substituindo o algoritmo PSO previamente considerado. A mudança se deu devido à instabilidade e falta de convergência do PSO nas simulações, enquanto o controle fuzzy apresentou melhor desempenho e robustez sob condições de sombreamento parcial.
 
-- **Monitoramento remoto:** O sistema deverá possibilitar o monitoramento remoto dos parâmetros do conversor Boost através de dashboards configurados no Zabbix, permitindo a análise e registro de desempenho.
+* **Envio de dados para o ThingSpeak:**
+  O microcontrolador ESP8266 deverá enviar continuamente os dados operacionais (tensão, corrente, potência e duty cycle) para a plataforma ThingSpeak, utilizando o protocolo HTTP em formato adequado. A escolha do ThingSpeak se deve à sua maior simplicidade de integração e confiabilidade em redes ponto a ponto, em comparação com o Zabbix, cuja configuração apresentou dificuldades de conectividade nesse tipo de rede.
 
-- **Ajuste automático baseado em monitoramento:** Com base nos dados monitorados pelo Zabbix, o sistema deverá permitir ajustes automáticos de parâmetros de operação, caso sejam detectados desvios de desempenho ou falhas.
+* **Monitoramento remoto via dashboards do ThingSpeak:**
+  O sistema deverá permitir a visualização remota dos dados enviados através dos gráficos e canais disponibilizados pelo ThingSpeak, viabilizando o acompanhamento do desempenho do sistema em tempo real.
+
+* **Ajuste automático baseado nos dados monitorados:**
+  Com base nos dados coletados e enviados, o sistema deverá ser capaz de identificar alterações no desempenho e realizar ajustes automáticos nos parâmetros de operação, sempre que necessário para manter a eficiência energética.
+
+---
 
 ## REQUISITOS NÃO FUNCIONAIS
 
-- **Desempenho:** O protótipo deverá garantir tempos de resposta baixos para leitura dos sensores, aplicação do algoritmo PSO e envio dos dados ao Zabbix, assegurando uma operação em tempo real.
+* **Desempenho em tempo real:**
+  O sistema deverá garantir baixa latência nas leituras dos sensores, aplicação do controle fuzzy e transmissão de dados para o ThingSpeak, assegurando operação eficiente em tempo real.
 
-- **Escalabilidade:** O sistema deverá ser capaz de integrar múltiplos conversores Boost monitorados simultaneamente, com cada um enviando dados a uma única instância do Zabbix, conforme a necessidade de expansão.
+* **Escalabilidade:**
+  A arquitetura do sistema deverá permitir a integração de múltiplas unidades de conversores Boost, com cada uma podendo enviar dados de forma independente a diferentes canais do ThingSpeak.
 
-- **Confiabilidade:** A solução deverá assegurar alta disponibilidade dos dados enviados ao Zabbix, com estratégias de reconexão automática do ESP8266 em caso de falhas de rede.
+* **Confiabilidade de comunicação:**
+  O sistema deverá manter comunicação estável com a plataforma de monitoramento, incorporando mecanismos de reconexão automática no ESP8266 em caso de falhas de rede, especialmente em redes ponto a ponto.
 
-- **Manutenibilidade:** O código do controlador deverá ser modular, facilitando atualizações futuras no algoritmo de controle, integração com novos sensores ou mudanças na estrutura de comunicação com o Zabbix.
+* **Facilidade de manutenção:**
+  O código do microcontrolador deverá ser modular e bem estruturado, permitindo atualizações no algoritmo de controle, inclusão de novos sensores ou alteração na plataforma de monitoramento com o mínimo de esforço.
 
-- **Portabilidade:** O sistema deverá ser capaz de ser facilmente adaptado para operar com outros microcontroladores similares ao ESP8266 ou para comunicação com diferentes servidores de monitoramento, além do Zabbix.
+* **Portabilidade:**
+  O sistema deverá poder ser adaptado facilmente para operar com outros microcontroladores similares ao ESP8266 (como o ESP32), bem como com diferentes serviços de nuvem, além do ThingSpeak.
 
-- **Eficiência no uso de recursos:** O firmware do ESP8266 deverá otimizar o uso de memória e processamento, assegurando um consumo energético reduzido, ideal para aplicações em ambientes com restrições de energia.
+* **Eficiência no uso de recursos:**
+  O firmware deverá ser otimizado para garantir baixo consumo de memória e processamento, o que é essencial para aplicações que operam com restrição de energia e conectividade limitada.
 
 ## Diagrama de Comunicação
 
