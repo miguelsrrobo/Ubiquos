@@ -196,7 +196,7 @@ O circuito é um **Conversor Boost** que:
    - O **resistor R2** limita a corrente para proteger o Gate do MOSFET.
 
 - **Envio de Dados**:
-   - O ESP também coleta informações como tensão e corrente (via sensores como o INA226) e envia os dados para o **Zabbix** para monitoramento remoto.
+   - O ESP também coleta informações como tensão e corrente (via sensores como o INA226) e envia os dados para o **ThingSpeak** para monitoramento remoto.
 
 ---
 
