@@ -71,17 +71,8 @@ Os requisitos funcionais definem as principais funcionalidades que o protótipo 
 * **Desempenho em tempo real:**
   O sistema deverá garantir baixa latência nas leituras dos sensores, aplicação do controle fuzzy e transmissão de dados para o ThingSpeak, assegurando operação eficiente em tempo real.
 
-* **Escalabilidade:**
-  A arquitetura do sistema deverá permitir a integração de múltiplas unidades de conversores Boost, com cada uma podendo enviar dados de forma independente a diferentes canais do ThingSpeak.
-
 * **Confiabilidade de comunicação:**
   O sistema deverá manter comunicação estável com a plataforma de monitoramento, incorporando mecanismos de reconexão automática no ESP8266 em caso de falhas de rede, especialmente em redes ponto a ponto.
-
-* **Facilidade de manutenção:**
-  O código do microcontrolador deverá ser modular e bem estruturado, permitindo atualizações no algoritmo de controle, inclusão de novos sensores ou alteração na plataforma de monitoramento com o mínimo de esforço.
-
-* **Portabilidade:**
-  O sistema deverá poder ser adaptado facilmente para operar com outros microcontroladores similares ao ESP8266 (como o ESP32), bem como com diferentes serviços de nuvem, além do ThingSpeak.
 
 * **Eficiência no uso de recursos:**
   O firmware deverá ser otimizado para garantir baixo consumo de memória e processamento, o que é essencial para aplicações que operam com restrição de energia e conectividade limitada.
