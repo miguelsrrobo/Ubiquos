@@ -371,284 +371,141 @@ O codigo e mais informação sobre o INA226 estara neste link: <linkhttps://gith
 ### Programa Final
 ```
 #include <Wire.h>
-#include <INA226_WE.h>   
+#include <INA226_WE.h>
+#include <LiquidCrystal_I2C.h>
+#include <ESP8266WiFi.h>
+
+// ====== CONFIG WIFI + THINGSPEAK ======
+const char* ssid     = "**********";
+const char* pass     = "**********";
+const char* server   = "api.thingspeak.com";
+String apiKey        = "**********";
+
+// ====== INA226 ======
 #define I2C_ADDRESS 0x40
- 
-INA226_WE ina226 = INA226_WE(I2C_ADDRESS);
- 
+INA226_WE ina226(I2C_ADDRESS);
 
-  float shuntVoltage_mV = 0.0;
-  float loadVoltage_V = 0.0;
-  float busVoltage_V = 0.0;
-  float current_mA = 0.0;
-  float power_mW = 0.0;
+// ====== LCD I2C ======
+#define COL 16
+#define LIN 2
+#define LCD_ADDR 0x27
+LiquidCrystal_I2C lcd(LCD_ADDR, COL, LIN);
 
-// Biblioteca// Bibliotecas
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
-#include <limits.h>
-#include <time.h>
+// ====== PWM PIN ======
+#define PWM_PIN 12
 
-// Inputs
-float tensao = 0; // Tensão obtida do painel solar
-float corrente = 0; // Corrente obtida do painel solar
-//float random = 0;
+WiFiClient client;
 
-// Outputs
-float pwm = 0; // Output Principal
-float D = 0.5;// Resultado do algoritimo P&O
-int Contador = 0;
-float Speed = 0;
-int p_atual = 0; // particula atual sendo considerada na simulação
-
-// Definições
-#define ExecTime 0.0000001 // Tempo de execução, 1*10^-7 s
-#define MAXwave 1 // Valor maximo que a onda triangular vai obter
-#define MINwave 0 // Valor minimo que a onda triangular vai obter
-#define NUM_INTERACAO 10 // Valor que representa o numero de interações
-#define NUM_PARTICULAS 20 // Numero de particulas
-#define INERTIA_WEIGHT 0.5 // Peso da inércia
-#define MAXD 0.95 // Valor maximo que o D poderá obter
-#define MIND 0.05 // Valor minimo que o D poderá obter
-#define Ciclo 12500 // Ciclos de analise para cada particula
-#define PWM_PIN 5  // ou outro pino seguro: 4, 5, 12, 13, 14
-
-// Particula //
-struct Particula{
-	float posicao; // posição da particula
-	float velocidade; // velocida da particula
-	float best_posicao; // melhor posição da particula
-	float best_potencia; // melhor potencia da particula
-	float potencia; // potencia da particula
-};
-
-struct Particula particula[NUM_PARTICULAS];
-
-// PSO
-float potencia = 0; // Tensão x Corrente
-float C1 = 0.6; // Peso cognitivo
-float C2 = 0.95; // Peso cognitivo
-
-int inic = 0;
-float gbestPSO = 0;
-float gbestPST = 0;
-
-// TriangularWave
-float frequencia = 31250; // Frequência desejada para a onda triangular
-float periodo = 0; // 1 / Frequência
-float valorWave = 0; // Valor atual da onda triangular
-float delta = 0; // Valor a se somar ou subtrair a cada periodo de execução 1 / passos por periodo da onda, versão estatica
-float somador = 0; // Valor que usa o delta porém é alterado a cada ciclo da onda
-float passos = 0.1; // Valor de passos que irá dar por periodo, Periodo / tempo de execução
-int espera = 1; // Variavel que guarda a informação para liberar a inversão do valor delta
-int AcumulodeCiclos = 0; // Acumulo de ciclos do sistemas, 
-int AcumulodeCiclos2 = 0; // Acumulo de ciclos do sistemas2, 
-
-/////////////////////////////////
-// Função da onda triangular ///
-///////////////////////////////
-void TriangularWave()
-{   
-   if(valorWave >= MAXwave && espera == 1)
-   {
-   	espera = 0;
-   	valorWave = MAXwave;
-   	somador = -delta;
-   }
-   else if(valorWave <= MINwave && espera == 0)
-   {
-   	espera = 1;
-   	valorWave = MINwave;
-   	somador = delta;
-   }
-   
- 	valorWave += somador;
+// ====== Fuzzy Logic ======
+float fuzzy_pertinencia_baixa(float p) {
+  if (p <= 30) return 1.0;
+  else if (p > 30 && p < 50) return (50 - p) / 20.0;
+  else return 0.0;
 }
 
-///////////////////////////////
-// Inicializar a Particulas //
-/////////////////////////////
-void InicializarParticulas()
-{
-	inic++;
-	float multi = ((MAXD - MIND) / NUM_PARTICULAS);
-	
-	for (int i = 0; i < NUM_PARTICULAS; i++) {
-		particula[i].posicao = MIND + (i * multi);
-		particula[i].velocidade = 0.00001;
-		particula[i].best_posicao = particula[i].posicao;
-		particula[i].best_potencia = particula[i].potencia;
-	}
+float fuzzy_pertinencia_media(float p) {
+  if (p >= 30 && p <= 60) return (p - 30) / 30.0;
+  else if (p > 60 && p < 90) return (90 - p) / 30.0;
+  else return 0.0;
 }
 
-void reset() {
-	if (AcumulodeCiclos2 == 10000000) 
-	{
-		gbestPSO = 0;
-		gbestPST = 0;			
-	float multi = ((MAXD - MIND) / NUM_PARTICULAS);
-	for (int i = 0; i < NUM_PARTICULAS; i++) 
-	{
-		particula[i].posicao = MIND + (i * multi);
-		particula[i].velocidade = 0.00001;
-		particula[i].best_posicao = 0;
-		particula[i].best_potencia = 0;
-		particula[i].potencia = 0;}
-		AcumulodeCiclos2=0;
-		p_atual = 0;
-		D = 0.5;// Resultado do algoritimo P&O
-	} 
+float fuzzy_pertinencia_alta(float p) {
+  if (p <= 70) return 0.0;
+  else if (p > 70 && p < 100) return (p - 70) / 30.0;
+  else return 1.0;
 }
 
-
-/////////////////////////////////
-// Função Atualizar Paticulas //
-///////////////////////////////
-void AtualizarPaticulas()
-{
-
-	AcumulodeCiclos++;
-	AcumulodeCiclos2++;
-	reset();
-	
-	if(AcumulodeCiclos >= Ciclo)
-	{
-			
-		particula[p_atual].potencia = particula[p_atual].potencia / Ciclo; // potencia da particula atua recebe a potencia tual dividida pelo ciclos de analise para cada particula, serve para ajuste fino
-		
-		AcumulodeCiclos = 0;// zera os ciclo do sistema
-		
-		// Calculo do PSO //
-		if(particula[p_atual].potencia > particula[p_atual].best_potencia) // se a potencia da particula atual for maior ou igual a melhor posição da particula atual faça
-		{
-			yield();  // Libera o watchdog
-			particula[p_atual].best_posicao = particula[p_atual].posicao; // a melhor posção recebe a posição
-			particula[p_atual].best_potencia = particula[p_atual].potencia; // a melhor potencia recebe a melhor potencia
-		}
-		if(particula[p_atual].best_potencia > gbestPST) // se a melhor potencia da da particula for maior que melhor potencia global faça
-		{
-			gbestPSO = particula[p_atual].best_posicao; // guarda a melhor posição da particula numa vairiavel global
-			gbestPST = particula[p_atual].best_potencia; // guarda a melhor potencia da particula numa vairiavel global
-		}
-				
-		//	Calculo da velocidade da particula
-		particula[p_atual].velocidade = INERTIA_WEIGHT * particula[p_atual].velocidade + C1 * (particula[p_atual].best_posicao - particula[p_atual].posicao) + C2 * 1 * (gbestPSO - particula[p_atual].posicao);
-		
-		//	Calculo da posição da particula
-		particula[p_atual].posicao = particula[p_atual].posicao + particula[p_atual].velocidade;
-		// Calculo do PSO //
-
-		//	Incremento das particulas
-		p_atual++;
-		if(p_atual >= NUM_PARTICULAS)
-		{
-			p_atual = 0;
-		}
-	}	
-	else
-	{
-		particula[p_atual].potencia += power_mW;
-	}
-	yield();  // <- Adicional
-	Contador++;
+int fuzzy_pwm(float p) {
+  float baixa = fuzzy_pertinencia_baixa(p);
+  float media = fuzzy_pertinencia_media(p);
+  float alta = fuzzy_pertinencia_alta(p);
+  float peso_total = baixa + media + alta;
+  if (peso_total == 0) return 0;
+  return (int)((baixa * 64 + media * 128 + alta * 255) / peso_total);
 }
 
-/////////////////////
-// Função do PSO ///
-///////////////////
-void PSO()
-{
-	if(inic == 0)
-	{
-		InicializarParticulas();	
-	}
-	else
-	{
-		 AtualizarPaticulas();
-	}
-	
-	D = particula[p_atual].posicao;
-
-	if(D > MAXD)
-	{
-		D = MAXD;
-	}
-	else if(D < MIND)
-	{
-		D = MIND;
-	}
-}
-
-void setup() 
-{
+void setup() {
   Serial.begin(115200);
-  while (!Serial); // wait until serial comes up on Arduino Leonardo or MKR WiFi 1010
   Wire.begin();
-  ina226.init();
-	pinMode(PWM_PIN, OUTPUT);
 
-  ina226.setResistorRange(0.1, 1.3); // choose resistor 0.1 Ohm and gain range up to 1.3A
- 
-  /* If the current values delivered by the INA226 differ by a constant factor
-     from values obtained with calibrated equipment you can define a correction factor.
-     Correction factor = current delivered from calibrated equipment / current delivered by INA226*/
- 
+  lcd.init();
+  lcd.backlight();
+
+  pinMode(PWM_PIN, OUTPUT);
+
+  if (!ina226.init()) {
+    Serial.println("INA226 não encontrado!");
+    while (1);
+  }
+
+  ina226.setResistorRange(0.1, 1.3); // ajuste conforme seu shunt
   ina226.setCorrectionFactor(0.93);
- 
-  Serial.println("INA226 Current Sensor Example Sketch - Continuous");
- 
-  ina226.waitUntilConversionCompleted(); //if you comment this line the first data might be zero
+  ina226.waitUntilConversionCompleted();
+
+  // Conectar ao WiFi
+  Serial.print("Conectando a ");
+  Serial.println(ssid);
+  WiFi.begin(ssid, pass);
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    Serial.print(".");
+  }
+  Serial.println("\nWiFi conectado!");
+  Serial.print("IP: "); Serial.println(WiFi.localIP());
 }
- 
-void loop()
-{
-	yield();  // Aqui logo no início
 
-  float shuntVoltage_mV = 0.0;
-  float loadVoltage_V = 0.0;
-  float busVoltage_V = 0.0;
-  float current_mA = 0.0;
-  float power_mW = 0.0;
- 
+void loop() {
   ina226.readAndClearFlags();
-  shuntVoltage_mV = ina226.getShuntVoltage_mV();
-  busVoltage_V = ina226.getBusVoltage_V();
-  current_mA = ina226.getCurrent_mA();
-  power_mW = ina226.getBusPower();
-  loadVoltage_V  = busVoltage_V + (shuntVoltage_mV / 1000);
- 
-  Serial.print("Shunt Voltage [mV]: "); Serial.println(shuntVoltage_mV);
-  Serial.print("Bus Voltage [V]: "); Serial.println(busVoltage_V);
-  Serial.print("Load Voltage [V]: "); Serial.println(loadVoltage_V);
-  Serial.print("Current[mA]: "); Serial.println(current_mA);
-  Serial.print("Bus Power [mW]: "); Serial.println(power_mW);
-  if (!ina226.overflow)
-  {
-    Serial.println("Values OK - no overflow");
+  if (ina226.overflow) {
+    Serial.println("Overflow detectado!");
   }
-  else
-  {
-    Serial.println("Overflow! Choose higher current range");
+
+  float tensao = ina226.getBusVoltage_V();
+  float corrente = ina226.getCurrent_mA() * 0.001; // mA para A
+  float potencia = tensao * corrente;
+  float power_mW = potencia * 1000;
+  float loadVoltage = tensao + (ina226.getShuntVoltage_mV() / 1000.0);
+
+  int pwmValue = fuzzy_pwm(potencia);
+  analogWrite(PWM_PIN, pwmValue);
+
+  // Display LCD
+  lcd.clear();
+  lcd.setCursor(0, 0);
+  lcd.print("P(W): "); lcd.print(potencia, 2);
+  lcd.setCursor(0, 1);
+  lcd.print("V: "); lcd.print(tensao, 2);
+  lcd.print(" I: "); lcd.print(corrente, 2);
+
+  // Serial
+  Serial.print("V: "); Serial.print(tensao);
+  Serial.print(" | I: "); Serial.print(corrente);
+  Serial.print(" | P: "); Serial.print(potencia);
+  Serial.print(" | PWM: "); Serial.println(pwmValue);
+
+  // Enviar para ThingSpeak
+  if (client.connect(server, 80)) {
+    String postStr = apiKey;
+    postStr += "&field1=" + String(tensao, 2);
+    postStr += "&field2=" + String(loadVoltage, 2);
+    postStr += "&field3=" + String(corrente * 1000, 2); // A para mA
+    postStr += "&field4=" + String(power_mW, 2);
+    postStr += "\r\n\r\n";
+
+    client.print("POST /update HTTP/1.1\n");
+    client.print("Host: api.thingspeak.com\n");
+    client.print("Connection: close\n");
+    client.print("X-THINGSPEAKAPIKEY: " + apiKey + "\n");
+    client.print("Content-Type: application/x-www-form-urlencoded\n");
+    client.print("Content-Length: ");
+    client.print(postStr.length());
+    client.print("\n\n");
+    client.print(postStr);
   }
-  Serial.println();
 
-  TriangularWave();  
-	PSO();
-	// comparação para output
-  if(D >= valorWave)
-	{
-		pwm = MAXwave; 
-	} 
-	else 
-	{ 	
-		pwm = MINwave;	
-	}
-
-	digitalWrite(PWM_PIN, (pwm == MAXwave) ? HIGH : LOW);
-	yield();  // E também aqui, ao final do loop
-
-
+  client.stop();
+  Serial.println("Dados enviados para ThingSpeak.");
+  delay(15000); // Intervalo mínimo do ThingSpeak é 15 segundos
 }
 ```
 
