@@ -41,7 +41,7 @@ Para superar essas limitações, técnicas de inteligência artificial (IA), com
 Dessa forma, optou-se por utilizar o controle fuzzy como solução para o problema de MPPT em condições de sombreamento parcial. O método fuzzy demonstrou melhor adaptabilidade às mudanças nas condições de irradiância e maior precisão na identificação do GMPP, contribuindo para o aumento da eficiência energética e para a viabilidade técnica dos sistemas fotovoltaicos em cenários reais.
 
 ## Descrição da Proposta
-Serão desenvolvidos dois hardwares: um conversor CC-CC (Conversor Boost) e um controlador baseado no ESP8266 com sensor INA226. Esses dispositivos serão responsáveis por analisar e controlar o passo de cálculo no conversor CC-CC. Os resultados obtidos, influenciados pela aplicação do método PSO, afetarão o ajuste do passo de cálculo e serão enviados para a plataforma Zabbix.
+Serão desenvolvidos dois hardwares: um conversor CC-CC (Conversor Boost) e um controlador baseado no ESP8266 com sensor INA226. Esses dispositivos serão responsáveis por analisar e controlar o passo de cálculo no conversor CC-CC. Os resultados obtidos, influenciados pela aplicação do método PSO, afetarão o ajuste do passo de cálculo e serão enviados para a plataforma THINGSPEAK.
 
 ## Requisitos
 
@@ -56,7 +56,7 @@ Os requisitos funcionais definem as principais funcionalidades que o protótipo 
   O sistema deverá empregar um controlador fuzzy para ajustar o duty cycle, substituindo o algoritmo PSO previamente considerado. A mudança se deu devido à instabilidade e falta de convergência do PSO nas simulações, enquanto o controle fuzzy apresentou melhor desempenho e robustez sob condições de sombreamento parcial.
 
 * **Envio de dados para o ThingSpeak:**
-  O microcontrolador ESP8266 deverá enviar continuamente os dados operacionais (tensão, corrente, potência e duty cycle) para a plataforma ThingSpeak, utilizando o protocolo HTTP em formato adequado. A escolha do ThingSpeak se deve à sua maior simplicidade de integração e confiabilidade em redes ponto a ponto, em comparação com o Zabbix, cuja configuração apresentou dificuldades de conectividade nesse tipo de rede.
+  O microcontrolador ESP8266 deverá enviar continuamente os dados operacionais (tensão, corrente, potência e duty cycle) para a plataforma ThingSpeak, utilizando o protocolo HTTP em formato adequado. A escolha do ThingSpeak se deve à sua maior simplicidade de integração e confiabilidade em redes ponto a ponto, em comparação com o THINGSPEAK, cuja configuração apresentou dificuldades de conectividade nesse tipo de rede.
 
 * **Monitoramento remoto via dashboards do ThingSpeak:**
   O sistema deverá permitir a visualização remota dos dados enviados através dos gráficos e canais disponibilizados pelo ThingSpeak, viabilizando o acompanhamento do desempenho do sistema em tempo real.
@@ -81,7 +81,7 @@ Os requisitos funcionais definem as principais funcionalidades que o protótipo 
 
 ## 5.1 Descrição Geral
 
-Nesta seção, apresentamos o diagrama de comunicação que ilustra o fluxo de dados e a interação entre os principais componentes do sistema de rastreamento de ponto de máxima potência (MPPT) utilizando um conversor Boost, um ESP8266 e o monitoramento via Zabbix.
+Nesta seção, apresentamos o diagrama de comunicação que ilustra o fluxo de dados e a interação entre os principais componentes do sistema de rastreamento de ponto de máxima potência (MPPT) utilizando um conversor Boost, um ESP8266 e o monitoramento via THINGSPEAK.
 
 O sistema é dividido em três grandes blocos:
 - **Módulo Fotovoltaico**
@@ -643,7 +643,7 @@ O principal resultado esperado ao final deste projeto é a implementação bem-s
 
 ---
 ## Conclusão
-Este trabalho propôs a aplicação da técnica de Otimização por Enxame de Partículas (PSO) para o rastreamento do ponto de máxima potência (MPPT) em sistemas fotovoltaicos, visando a otimização da eficiência energética, especialmente em condições de sombreamento parcial. A implementação da técnica no controle do conversor Boost, integrado com o microcontrolador ESP8266 e o sensor INA226, demonstrou a viabilidade de melhorar a eficiência de geração solar através de um controle dinâmico e inteligente. O envio dos dados para a plataforma Zabbix garantiu o monitoramento remoto e a análise em tempo real dos parâmetros do sistema, proporcionando uma solução robusta e eficiente para o gerenciamento de sistemas fotovoltaicos.
+Este trabalho propôs a aplicação da técnica de Otimização por Enxame de Partículas (PSO) para o rastreamento do ponto de máxima potência (MPPT) em sistemas fotovoltaicos, visando a otimização da eficiência energética, especialmente em condições de sombreamento parcial. A implementação da técnica no controle do conversor Boost, integrado com o microcontrolador ESP8266 e o sensor INA226, demonstrou a viabilidade de melhorar a eficiência de geração solar através de um controle dinâmico e inteligente. O envio dos dados para a plataforma THINGSPEAK garantiu o monitoramento remoto e a análise em tempo real dos parâmetros do sistema, proporcionando uma solução robusta e eficiente para o gerenciamento de sistemas fotovoltaicos.
 
 A importância desse projeto reside não apenas na melhoria da eficiência de sistemas fotovoltaicos, mas também na contribuição para a aplicação de técnicas avançadas de inteligência artificial em soluções práticas de energia renovável. Espera-se que, com a continuação do desenvolvimento e a realização de mais testes, este sistema possa ser escalado para ambientes com múltiplos módulos solares.
 
