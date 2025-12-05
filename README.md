@@ -197,7 +197,7 @@ Módulo Solar → Entrada VCC → C11 → L2 → (Q1 controlado por U1) → D1 �
                   ↓
             Controle PWM (ESP → IR2111 → MOSFET)
                   ↓
-          Coleta de Dados → Zabbix (via rede Wi-Fi)
+          Coleta de Dados → THINGSPEAK (via rede Wi-Fi)
 ```
 
 ## Revisão da Literatura
