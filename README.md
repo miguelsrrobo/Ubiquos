@@ -149,11 +149,13 @@ O circuito é um **Conversor Boost** que:
 
 ---
 ---
+
 Conversor BOOST
 
 <p align = "center">
   <img src="https://github.com/miguelsrrobo/Ubiquos/blob/main/Imagens/Captura%20de%20tela%20de%202026-01-22%2019-13-51.png" width="30%" />
 </p>
+
 ---
 
 ### 📋 Principais Componentes e Suas Funções
